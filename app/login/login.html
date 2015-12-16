@@ -1,0 +1,20 @@
+<div ng-controller="LoginCtrl">
+    <p>Please log in</p>
+
+   <div id="login-container">
+  <form ng-submit="submit()">
+    <fieldset>
+      <input type="text" name="username" ng-model="username" ng-disabled="loading" />
+      <br>
+      <input type="password" name="password" ng-model="password" ng-disabled="loading" />
+      <br>
+      <button type="submit" ng-disabled="loading">submit</button>
+    </fieldset>
+  </form>
+
+    <p><a href="#/signup">Sign up</a></p>
+
+    <p><a href="#/reset-password">Reset password</a></p>
+</div>
+  <div style="margin-top: 10px;">{{message}}</div>
+</div>
