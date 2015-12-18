@@ -37,8 +37,9 @@ app.controller('MenuCtrl', function ($scope, $location) {
 });
 
 app.controller('UserCtrl', ['$scope', '$http', '$window', function ($scope, $http, $window) {
-
-    if (!$window.sessionStorage.token) {
+    var us ='';
+    var pass ='';
+    if (!$window.sessionStorage.access_token) {
         $scope.isAuthenticated = false;
     }
     else {
@@ -48,9 +49,9 @@ app.controller('UserCtrl', ['$scope', '$http', '$window', function ($scope, $htt
 
     $scope.submit = function (user) {
         var grant = "&grant_type=password";
-        var client_id = "client_id=SBAuSotGA6lBS3Yckqny3oyg8zfiEXyns3cHy10A";
-        var us = user.username;
-        var pass = user.password;
+        var client_id = "client_id=hnwWIfbrYuInJB0G5NrhT1ULXkwfsZ8J6fZHZOQB";
+        us = user.username;
+        pass = user.password;
         var data = client_id + grant + '&username=' + us + '&password=' + pass
         $http({
             url: 'http://127.0.0.1:5000/oauth/token?' + data,
@@ -60,14 +61,15 @@ app.controller('UserCtrl', ['$scope', '$http', '$window', function ($scope, $htt
             }
         })
             .success(function (data, status, headers, config) {
-                $window.sessionStorage.token = data.access_token;
+                $window.sessionStorage.access_token = data.access_token;
+                $window.sessionStorage.user = us;
                 $scope.isAuthenticated = true;
                 console.log(data);
                 return;
             })
             .error(function (data, status, headers, config) {
                 // Erase the token if the user fails to log in
-                delete $window.sessionStorage.token;
+                delete $window.sessionStorage.access_token;
                 $scope.isAuthenticated = false;
 
                 // Handle login errors here
@@ -79,7 +81,8 @@ app.controller('UserCtrl', ['$scope', '$http', '$window', function ($scope, $htt
         $scope.welcome = '';
         $scope.message = '';
         $scope.isAuthenticated = false;
-        delete $window.sessionStorage.token;
+        delete $window.sessionStorage.access_token;
+        delete $window.sessionStorage.user;
     };
 
     $scope.callRestricted = function () {
@@ -101,8 +104,8 @@ app.factory('authInterceptor', function ($rootScope, $q, $window) {
     request: function (config) {
         console.log('intercept this config: ' + config);
         config.headers = config.headers || {};
-        if ($window.sessionStorage.token) {
-            config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+        if ($window.sessionStorage.access_token) {
+            config.headers.Authorization = 'Bearer ' + $window.sessionStorage.access_token;
         }
         return config;
     }
@@ -133,7 +136,6 @@ app.config(function ($routeProvider, $httpProvider) {
     $routeProvider.when('/home', {
         templateUrl: 'home/home.html',
         controller: 'HomeCtrl',
-        requiresLogin: true
 
 
     });
