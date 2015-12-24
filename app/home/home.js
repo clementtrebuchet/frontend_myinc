@@ -31,9 +31,7 @@ var userFactory = function ($resource) {
             return user_factory.all_users;
         },
         resource_user: function () {
-            var user = $resource('http://localhost:5000/eve/users/:username', {username:'@id'});
-
-
+            var user = $resource('http://localhost:5000/peoples/:username', {username: '@id'});
             return user;
         }
 
@@ -57,8 +55,8 @@ app.controller('HomeCtrl', ['$scope', 'User', '$window', function ($scope, User,
     //Perform "GET http://mydomain.com/api/user/"
     if (User.all_users.length <= 0) {
         var user = User.resource_user();
-        user.get({username:$window.sessionStorage.user}).
-                $promise.then(function(user){
+        user.get({username: $window.sessionStorage.user}).
+            $promise.then(function (user) {
                 $scope.users = user
             });
     } else {

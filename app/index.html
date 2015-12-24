@@ -16,50 +16,111 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
-    <link rel="stylesheet" href="static/login.css">
-    <link rel="stylesheet" href="app.css">
+
+    <link rel="stylesheet" href="static/main.css">
+    <link rel="stylesheet" href="static/font-awesome.min.css">
+
+    <!--<link rel="stylesheet" href="app.css">-->
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet'
+          type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
     <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+
+
 </head>
 <body ng-app="myApp" ng-controller="UserCtrl">
- <div ng-controller="MenuCtrl" ng-show="isAuthenticated">
-        <ul class="menu">
-            <li><a href="" ng-click="go('/home')">home</a></li>
-            <li><a ng-click="logout()" href="">Logout</a></li>
-            <li><a ng-click="callRestricted()" href="">Shh, this is private!</a></li>
-        </ul>
-    </div>
-
-       <div class="container">
-             <div>{{message}}</div>
-        <div class="card card-container" ng-show="!isAuthenticated">
-            <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
-            <p id="profile-name" class="profile-name-card"></p>
-            <form   ng-submit="submit(user)" class="form-signin">
-                <span id="reauth-email" class="reauth-email"></span>
-                <input type="text" ng-model="user.username" placeholder="Username" class="form-control" required autofocus>
-                <input type="password" ng-model="user.password" placeholder="Password" class="form-control" required>
-                <div id="remember" class="checkbox">
-                    <label>
-                        <input type="checkbox" value="remember-me"> Remember me
-                    </label>
+<div id="section-topbar">
+    <div id="topbar-inner">
+        <div class="container">
+            <div class="row">
+                <div class="dropdown">
+                    <ul id="nav" class="nav">
+                        <li class="menu-item"><a class="smoothScroll" ng-click="go('/')" title="Home"><i
+                                class="icon-home"></i></a></li>
+                       <!-- <li class="menu-item"><a class="smoothScroll" href="#resume" title="Resume"><i
+                                class="icon-file"></i></a></li>
+                        <li class="menu-item"><a class="smoothScroll" href="#work" title="Works"><i
+                                class="icon-briefcase"></i></a></li>
+                        <li class="menu-item"><a class="smoothScroll" href="#contact" title="Contact"><i
+                                class="icon-envelope"></i></a></li>-->
+                        <li class="menu-item"><a href="" ng-click="go('/home')"><i class="icon-user"></i></a></li>
+                        <!--<li  class="menu-item"><a href="" ng-click="go('/login')"><i class="icon-signin"></i></a></li>-->
+                        <li class="menu-item"><a ng-click="logout()" href=""><i class="icon-signout"></i></a></li>
+                        <!--<li ng-show="isAuthenticated" class="menu-item"><a href="">{{ user.username }}</a></li>-->
+                    </ul>
+                    <!--/ uL#nav -->
                 </div>
-                 <input type="submit" class="btn btn-lg btn-primary btn-block btn-signin" value="Login" />
-            </form><!-- /form -->
-            <a href="#" class="forgot-password">
-                Forgot the password?
-            </a>
-        </div><!-- /card-container -->
-    </div><!-- /container -->
-      <div>{{error}}</div>
+                <!-- /.dropdown -->
+
+                <div class="clear"></div>
+            </div>
+            <!--/.row -->
+        </div>
+        <!--/.container -->
+
+        <div class="clear"></div>
+    </div>
+    <!--/ #topbar-inner -->
+</div>
+<!--/ #section-topbar -->
 
 
+<div ng-view>
+
+</div>
+
+<br />
+<!--FOOTER DESCRIPTION -->
+<div id="footwrap">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-2 col-lg-offset-1">
+                <h5>CONTACT</h5>
+            </div>
+            <div class="col-lg-6">
+                <p>
+                    <t>Email</t>
+                    <br/>
+                    william@blacktie.co <br/>
+                </p>
+                <p>
+                    <t>Adress</t>
+                    <br/>
+                    Some Ave. 987 <br/>
+                    Postal 23892 <br/>
+                    London, England. <br/>
+                </p>
+                <p>
+                    <t>Phone</t>
+                    <br/>
+                    +55 8933-2383 <br/>
+                </p>
+            </div>
+            <div class="col-lg-3">
+                <p>
+                    <sm>SOCIAL LINKS</sm>
+                </p>
+                <p>
+                    <a href="#"><i class="icon-dribbble"></i></a>
+                    <a href="#"><i class="icon-twitter"></i></a>
+                    <a href="#"><i class="icon-facebook"></i></a>
+                    <a href="#"><i class="icon-linkedin"></i></a>
+                    <a href="#"><i class="icon-apple"></i></a>
+
+                </p>
+            </div>
+        </div>
+        <!--/.row -->
+    </div>
+    <!--/.container -->
+</div>
+<!--/ #footer -->
 
 
 <!--[if lt IE 7]>
 
 <![endif]-->
-
-<div ng-view></div>
 
 
 <!-- In production use:
@@ -71,8 +132,10 @@
 <script src="bower_components/angular-cookies/angular-cookies.js"></script>
 <script src="bower_components/angular-cookie/angular-cookie.js"></script>
 <script src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
+<script src="login/login.js"></script>
 <script src="app.js"></script>
 <script src="home/home.js"></script>
+<script src="welcome/welcome.js"></script>
 <script src="components/version/version.js"></script>
 <script src="components/version/version-directive.js"></script>
 <script src="components/version/interpolate-filter.js"></script>

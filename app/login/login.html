@@ -1,20 +1,42 @@
-<div ng-controller="LoginCtrl">
-    <p>Please log in</p>
+<head>
+        <link rel="stylesheet" href="static/login.css">
+</head>
+<br />
+<br />
+<div class="container">
 
-   <div id="login-container">
-  <form ng-submit="submit()">
-    <fieldset>
-      <input type="text" name="username" ng-model="username" ng-disabled="loading" />
-      <br>
-      <input type="password" name="password" ng-model="password" ng-disabled="loading" />
-      <br>
-      <button type="submit" ng-disabled="loading">submit</button>
-    </fieldset>
-  </form>
+    <div class="card card-container" ng-show="!isAuthenticated">
+        <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png"/>
 
-    <p><a href="#/signup">Sign up</a></p>
+        <p id="profile-name" class="profile-name-card"></p>
 
-    <p><a href="#/reset-password">Reset password</a></p>
+        <form ng-submit="submit(user)" class="form-signin">
+            <span id="reauth-email" class="reauth-email"></span>
+            <input type="text" ng-model="user.username" placeholder="Username" class="form-control" required autofocus>
+            <input type="password" ng-model="user.password" placeholder="Password" class="form-control" required>
+
+            <div id="remember" class="checkbox">
+                <label>
+                    <input type="checkbox" value="remember-me"> Remember me
+                </label>
+            </div>
+            <input type="submit" class="btn btn-lg btn-primary btn-block btn-signin" value="Login"/>
+
+
+        </form>
+         <div class="alert alert-danger collapse" role="alert" show-errors id="error">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="false"></span>
+                <span >{{error}}</span>
+
+            </div>
+        <!-- /form -->
+        <a href="#" class="forgot-password">
+            Forgot the password?
+        </a>
+
+
+    </div>
+    <!-- /card-container -->
 </div>
-  <div style="margin-top: 10px;">{{message}}</div>
-</div>
+<!-- /container -->
+
