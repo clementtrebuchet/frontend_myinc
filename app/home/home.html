@@ -1,172 +1,310 @@
-<div ng-controller="HomeCtrl" ng-show="isAuthenticated">
+<head>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="static/bootstrap.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="static/landing-page.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="static/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+          type="text/css">
+</head>
+
+<div ng-controller="HomeCtrl">
     <div id="headerwrap">
-		<div class="container">
-			<div class="row centered">
-				<div class="col-lg-12">
-					<h1>Trébuchet. Clément</h1>
-					<h3>Linux Engineer / Software Developer | <a href="mailto:clement.trebuchet@gmail.com">clement.trebuchet@gmail.com</a></h3>
-				</div><!--/.col-lg-12 -->
-			</div><!--/.row -->
-		</div><!--/.container -->
-	</div><!--/.#headerwrap -->
+        <div class="container">
+            <div class="row centered">
+                <div class="col-lg-12">
+                    <h1>Trébuchet. Clément</h1>
 
-   	<section id="about" name="about"></section>
-	<div id="intro">
-		<div class="container">
-			<div class="row">
+                    <h3>Linux Engineer / Software Developer | <a href="mailto:clement.trebuchet@gmail.com">clement.trebuchet@gmail.com</a>
+                    </h3>
+                </div>
+                <!--/.col-lg-12 -->
+            </div>
+            <!--/.row -->
+        </div>
+        <!--/.container -->
+    </div>
+    <!--/.#headerwrap -->
 
-				<div class="col-lg-2 col-lg-offset-1">
-					<h5>ABOUT</h5>
-				</div>
-				<div class="col-lg-6">
-					<p>I'm web designer & front-end developer with 7 years of professional experience. I'm interested in all kinds of visual communication, but my major focus is on designing web, mobile & tablet interfaces. I also have skills in other fields like branding, icon design or web development.</p>
-				</div>
-				<div class="col-lg-3">
-					<p><a href="#"><i class="icon-file"></i></a> <sm>DOWNLOAD PDF</sm></p>
-				</div>
+    <section id="about" name="about"></section>
+    <div id="intro">
+        <div class="container">
+            <div class="row">
 
-			</div><!--/.row -->
-		</div><!--/.container -->
-	</div><!--/ #intro -->
+                <div class="col-lg-2 col-lg-offset-1">
+                    <h5>ABOUT</h5>
+                </div>
+                <div class="col-lg-6">
+                    <p>I'm web designer & front-end developer with 7 years of professional experience. I'm interested in
+                        all kinds of visual communication, but my major focus is on designing web, mobile & tablet
+                        interfaces. I also have skills in other fields like branding, icon design or web
+                        development.</p>
+                </div>
+                <div class="col-lg-3">
+                    <p><a href="#"><i class="icon-file"></i></a>
+                        <sm>DOWNLOAD PDF</sm>
+                    </p>
+                </div>
 
-
-	<section id="resume" name="resume"></section>
-	<!--EDUCATION DESCRIPTION -->
-	<div class="container desc">
-		<div class="row">
-
-				<div class="col-lg-2 col-lg-offset-1">
-					<h5>EDUCATION</h5>
-				</div>
-				<div class="col-lg-6">
-					<p><t>Master of Web Design</t><br/>
-						St. Patrick University <br/>
-						<i>3 Years Course</i>
-					</p>
-				</div>
-				<div class="col-lg-3">
-					<p><sm>GRADUATING IN MAY 2014</sm><br/>
-					<imp><sm>IN PROGRESS</sm></imp>
-					</p>
-				</div>
-
-				<div class="col-lg-6 col-lg-offset-3">
-					<p><t>Degree of Web Developer</t><br/>
-						Hastings University <br/>
-						<i>2 Years Course</i>
-					</p>
-				</div>
-				<div class="col-lg-3">
-					<p><sm>JUNE 2012</sm></p>
-				</div>
-
-		</div><!--/.row -->
-		<br>
-		<hr>
-	</div><!--/.container -->
+            </div>
+            <!--/.row -->
+        </div>
+        <!--/.container -->
+    </div>
+    <!--/ #intro -->
 
 
-	<!--WORK DESCRIPTION -->
-	<div class="container desc">
-		<div class="row">
+    <section id="resume" name="resume"></section>
+    <!--EDUCATION DESCRIPTION -->
+    <div class="container desc">
 
-				<div class="col-lg-2 col-lg-offset-1">
-					<h5>WORK</h5>
-				</div>
-				<div class="col-lg-6">
-					<p><t>Front-end Developer</t><br/>
-						Black Tie Corp. <br/>
-					</p>
-					<p><more>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</more></p>
-				</div>
-				<div class="col-lg-3">
-					<p><sm>AUGUST 2012 - CURRENT</sm></p>
-				</div>
+        <div class="row">
+            <div class="col-lg-2 col-lg-offset-1">
+                <h5>EDUCATION</h5>
+                <button class="btn btn-default btn-lg" ng-show="isAuthenticated">Add</button>
+            </div>
+                  <div ng-hide="users.$resolved">
+                <i class="icon-file">Loading…</i>
 
-				<div class="col-lg-6 col-lg-offset-3">
-					<p><t>Web Designer - Intern</t><br/>
-						Onassis Ltd. <br/>
-					</p>
-					<p><more>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</more></p>
-				</div>
-				<div class="col-lg-3">
-					<p><sm>JUNE 2010 - JULY 2012</sm></p>
-				</div>
-		</div><!--/.row -->
-		<br>
-		<hr>
-	</div><!--/.container -->
+            </div>
+            <div ng-repeat="education in users.education">
+
+                <div class="col-lg-6">
+                    <p>
+                        <t ng-if='isAuthenticated'  editable-text="education.cursus_title" onaftersave="updateAny()">{{ education.cursus_title }}
+                        </t>
+                        <t ng-if='!isAuthenticated'>{{ education.cursus_title }}</t>
+                        <br/>
+                        <t ng-if='isAuthenticated' editable-text="education.cursus_location.school_name" onaftersave="updateAny()">{{
+                            education.cursus_location.school_name }}
+                        </t>
+                        <t ng-if='!isAuthenticated'>{{ education.cursus_location.school_name }}</t>
+                        <br/>
+                        <t ng-if='isAuthenticated' editable-text="education.cursus_location.school_address" onaftersave="updateAny()">{{
+                            education.cursus_location.school_address }}
+                        </t>
+                        <t ng-if='!isAuthenticated'>{{ education.cursus_location.school_address }}</t>
+                        <br/>
+                        <t ng-if='isAuthenticated' editable-text="education.cursus_location.school_city" onaftersave="updateAny()">{{
+                            education.cursus_location.school_city }}
+                        </t>
+                        <t ng-if='!isAuthenticated'>{{ education.cursus_location.school_city }}</t>
+                        <br/>
+                        <a ng-if='isAuthenticated' href="{{ education.cursus_location.school_link }}"
+                           editable-url="education.cursus_location.school_link" onaftersave="updateAny()">{{ education.cursus_location.school_link
+                            }}</a>
+                        <a ng-if='!isAuthenticated' href="{{ education.cursus_location.school_link }}">{{
+                            education.cursus_location.school_link }}</a>
+                        <br/>Periods : <br/>
+                        <i ng-if="isAuthenticated" editable-bsdate="education.cursus_date_start" e-is-open="data.isOpen"
+                           e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yy H:mm:ss" e-init-date="false" onaftersave="updateAny()">{{
+                            education.cursus_date_start | date:"dd/MM/yy H:mm:ss"}}</i>
+                        <i ng-if="!isAuthenticated">{{ education.cursus_date_start | date:"dd/MM/yy H:mm:ss"}}</i><br/>
+                        <i ng-if="isAuthenticated" editable-bsdate="education.cursus_date_end" e-is-open="data.isOpen"
+                           e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yy H:mm:ss" e-init-date="false">{{
+                            education.cursus_date_end |date:"dd/MM/yy H:mm:ss"}}</i>
+                        <i ng-if="!isAuthenticated">{{ education.cursus_date_end | date:"dd/MM/yy H:mm:ss"}}</i>
+                    </p>
+                </div>
+                <div class="col-lg-3">
+                    <p>
+                        <sm ng-if="isAuthenticated" editable-bsdate="education.cursus_date_end" e-is-open="data.isOpen"
+                            e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yy H:mm:ss" e-init-date="false" onaftersave="updateAny()">
+                            GRADUATING IN {{ education.cursus_date_end | date:"dd/MM/yy H:mm:ss"}}
+                        </sm>
+                        <sm ng-if="!isAuthenticated">GRADUATING IN : {{ education.cursus_date_end | date:"dd/MM/yy
+                            H:mm:ss"}}
+                        </sm>
+
+                        <br/>
+                        <imp>
+                            <sm ng-if='isAuthenticated' editable-text="education.cursus_status" onaftersave="updateAny()">{{
+                                education.cursus_status | uppercase }}
+                            </sm>
+                            <sm ng-if='!isAuthenticated'>{{ education.cursus_status | uppercase }}</sm>
+
+                        </imp>
+                    </p>
+                </div>
+            </div>
 
 
-	<!--AWARDS DESCRIPTION -->
-	<div class="container desc">
-		<div class="row">
-				<div class="col-lg-2 col-lg-offset-1">
-					<h5>AWARDS</h5>
-				</div>
-				<div class="col-lg-6">
-					<p><t>Best Web Design</t><br/>
-						Black Tie Site <br/>
-					</p>
-				</div>
-				<div class="col-lg-3">
-					<p><sm>NOVEMBER 2013</sm></p>
-				</div>
-
-				<div class="col-lg-6 col-lg-offset-3">
-					<p><t>Designer of the Year</t><br/>
-						Awwwards Site
-					</p>
-					<p><more>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.</more></p>
-				</div>
-				<div class="col-lg-3">
-					<p><sm>2013</sm></p>
-				</div>
-
-		</div><!--/.row -->
-		<br>
-	</div><!--/.container -->
+        </div>
+        <!--/.row -->
+        <br>
+        <hr>
+    </div>
+    <!--/.container -->
 
 
-	<section id="work" name="work"></section>
-	<!--PORTFOLIO DESCRIPTION -->
-	<div class="container desc">
-		<div class="row">
-				<div class="col-lg-2 col-lg-offset-1">
-					<h5>PORTFOLIO</h5>
-				</div>
-				<div class="col-lg-6">
-					<p><img class="img-responsive" src="assets/img/port01.jpg" alt=""></p>
-				</div>
-				<div class="col-lg-3">
-					<p>CANALS OF ENGLAND</p>
-				<p><more>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br/><br/>
-					<sm><i class="icon-tag"></i> design</sm></more>
-				</p>
-				</div>
+    <!--WORK DESCRIPTION -->
+    <div class="container desc">
+        <div class="row">
 
-				<div class="col-lg-6 col-lg-offset-3">
-					<p><img class="img-responsive" src="assets/img/port02.jpg" alt=""></p>
-				</div>
-				<div class="col-lg-3">
-						<p>SANKEY</p>
-					<p><more>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br/><br/>
-						<sm><i class="icon-tag"></i> front-end</sm></more>
-					</p>
-				</div>
+            <div class="col-lg-2 col-lg-offset-1">
+                <h5>WORK</h5>
+            </div>
+            <div class="col-lg-6">
+                <p>
+                    <t>Front-end Developer</t>
+                    <br/>
+                    Black Tie Corp. <br/>
+                </p>
+                <p>
+                    <more>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                        has
+                        been the industry's standard dummy text ever since the 1500s, when an unknown printer
+                        took a
+                        galley of type and scrambled it to make a type specimen book.
+                    </more>
+                </p>
+            </div>
+            <div class="col-lg-3">
+                <p>
+                    <sm>AUGUST 2012 - CURRENT</sm>
+                </p>
+            </div>
 
-				<div class="col-lg-6 col-lg-offset-3">
-					<p><img class="img-responsive" src="assets/img/port03.jpg" alt=""></p>
-				</div>
-				<div class="col-lg-3">
-						<p>WE GROW</p>
-					<p><more>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.<br/><br/>
-						<sm><i class="icon-tag"></i> web design</sm></more>
-					</p>
-				</div>
+            <div class="col-lg-6 col-lg-offset-3">
+                <p>
+                    <t>Web Designer - Intern</t>
+                    <br/>
+                    Onassis Ltd. <br/>
+                </p>
+                <p>
+                    <more>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                        has
+                        been the industry's standard dummy text ever since the 1500s, when an unknown printer
+                        took a
+                        galley of type and scrambled it to make a type specimen book.
+                    </more>
+                </p>
+            </div>
+            <div class="col-lg-3">
+                <p>
+                    <sm>JUNE 2010 - JULY 2012</sm>
+                </p>
+            </div>
+        </div>
+        <!--/.row -->
+        <br>
+        <hr>
+    </div>
+    <!--/.container -->
 
-		</div><!--/.row -->
-		<br>
-		<br>
-	</div><!--/.container -->
+
+    <!--AWARDS DESCRIPTION -->
+    <div class="container desc">
+        <div class="row">
+            <div class="col-lg-2 col-lg-offset-1">
+                <h5>AWARDS</h5>
+            </div>
+            <div class="col-lg-6">
+                <p>
+                    <t>Best Web Design</t>
+                    <br/>
+                    Black Tie Site <br/>
+                </p>
+            </div>
+            <div class="col-lg-3">
+                <p>
+                    <sm>NOVEMBER 2013</sm>
+                </p>
+            </div>
+
+            <div class="col-lg-6 col-lg-offset-3">
+                <p>
+                    <t>Designer of the Year</t>
+                    <br/>
+                    Awwwards Site
+                </p>
+                <p>
+                    <more>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                        has
+                        been the industry's standard dummy text ever since the 1500s, when an unknown printer
+                        took a
+                        galley of type and scrambled it to make a type specimen book.
+                    </more>
+                </p>
+            </div>
+            <div class="col-lg-3">
+                <p>
+                    <sm>2013</sm>
+                </p>
+            </div>
+
+        </div>
+        <!--/.row -->
+        <br>
+    </div>
+    <!--/.container -->
+
+
+    <section id="work" name="work"></section>
+    <!--PORTFOLIO DESCRIPTION -->
+    <div class="container desc">
+        <div class="row">
+            <div class="col-lg-2 col-lg-offset-1">
+                <h5>PORTFOLIO</h5>
+            </div>
+            <div class="col-lg-6">
+                <p><img class="img-responsive" src="assets/img/port01.jpg" alt=""></p>
+            </div>
+            <div class="col-lg-3">
+                <p>CANALS OF ENGLAND</p>
+
+                <p>
+                    <more>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                        has
+                        been the industry's standard dummy text ever since the 1500s, when an unknown printer
+                        took a
+                        galley of type and scrambled it to make a type specimen book.<br/><br/>
+                        <sm><i class="icon-tag"></i> design</sm>
+                    </more>
+                </p>
+            </div>
+
+            <div class="col-lg-6 col-lg-offset-3">
+                <p><img class="img-responsive" src="assets/img/port02.jpg" alt=""></p>
+            </div>
+            <div class="col-lg-3">
+                <p>SANKEY</p>
+
+                <p>
+                    <more>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                        has
+                        been the industry's standard dummy text ever since the 1500s, when an unknown printer
+                        took a
+                        galley of type and scrambled it to make a type specimen book.<br/><br/>
+                        <sm><i class="icon-tag"></i> front-end</sm>
+                    </more>
+                </p>
+            </div>
+
+            <div class="col-lg-6 col-lg-offset-3">
+                <p><img class="img-responsive" src="assets/img/port03.jpg" alt=""></p>
+            </div>
+            <div class="col-lg-3">
+                <p>WE GROW</p>
+
+                <p>
+                    <more>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                        has
+                        been the industry's standard dummy text ever since the 1500s, when an unknown printer
+                        took a
+                        galley of type and scrambled it to make a type specimen book.<br/><br/>
+                        <sm><i class="icon-tag"></i> web design</sm>
+                    </more>
+                </p>
+            </div>
+
+        </div>
+        <!--/.row -->
+        <br>
+        <br>
+    </div>
+    <!--/.container -->
 </div>

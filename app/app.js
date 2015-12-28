@@ -6,8 +6,12 @@ var app = angular.module('myApp', [
     'ngRoute',
     'angular-jwt',
     'ngResource',
+    'restangular',
+    "xeditable",
+    "ui.bootstrap",
     'myApp.welcome',
     'myApp.home',
+    'myApp.admin',
     'myApp.login',
     'myApp.version'
 
@@ -108,38 +112,61 @@ app.factory('authInterceptor', function ($rootScope, $q, $window) {
         }
     };
 });
-app.controller('AppCtrl', ['$scope', '$window','$location', function ($scope, $window, $location) {
+app.controller('AppCtrl', ['$scope', '$window', '$location', function ($scope, $window, $location) {
 
 }]);
 
 function _redirectIfNotAuthenticated($rootScope, $window, $location) {
-        if (!$window.sessionStorage.access_token) {
-            $rootScope.isAuthenticated = false;
-            $location.path('/login')
+    if (!$window.sessionStorage.access_token) {
+        $rootScope.isAuthenticated = false;
+        $location.path('/login')
 
-        }
-        else {
-            $rootScope.isAuthenticated = true;
-        }
     }
+    else {
+        $rootScope.isAuthenticated = true;
+    }
+}
 
-app.config(function ($routeProvider, $httpProvider) {
+app.config(function ($routeProvider, $httpProvider, RestangularProvider) {
 
+    RestangularProvider.setBaseUrl('http://192.168.0.2:5000/');
+    RestangularProvider.setRestangularFields({
+        id: "_id",
+        etag: '_etag',
+    });
+    RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
+          var extractedData;
+          // .. to look for getList operations
+          if (operation === "getList") {
+            // .. and handle the data and meta data
+            extractedData = data._items;
+            extractedData._links = data._links;
+            extractedData._meta = data._meta;
+          } else {
+            extractedData = data._items;
+          }
+          return extractedData;
+        });
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
     $httpProvider.interceptors.push('authInterceptor');
 
     $routeProvider.when('/home', {
         templateUrl: 'home/home.html',
-        controller: 'HomeCtrl',
-        resolve: {
-            redirectIfNotAuthenticated: _redirectIfNotAuthenticated
-        },
+        controller: 'HomeCtrl'
     });
 
     $routeProvider.when('/login', {
         templateUrl: 'login/login.html',
         controller: 'UserCtrl'
+    });
+
+    $routeProvider.when('/admin', {
+        templateUrl: 'admin/admin.html',
+        controller: 'AdminCtrl',
+        resolve: {
+            redirectIfNotAuthenticated: _redirectIfNotAuthenticated
+        }
     });
 
     $routeProvider.when('/', {

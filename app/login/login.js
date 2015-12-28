@@ -23,7 +23,7 @@ app.config(['$routeProvider', '$resourceProvider', '$httpProvider', function ($r
     });
 }]);
 
-app.directive('showErrors', function () {
+app.directive('showErrors', function ($timeout) {
     return {
         restrict: 'A',
         link: function (scope, el) {
@@ -33,20 +33,28 @@ app.directive('showErrors', function () {
                 console.log(errorDiv);
                 errorDiv.toggleClass('alert alert-danger collapse');
                 errorDiv.toggleClass('alert alert-danger');
+                $timeout(
+                    function () {
+                        errorDiv.toggleClass('alert alert-danger');
+                        errorDiv.toggleClass('alert alert-danger collapse');
+                    },
+                    2000);
 
             };
 
         }
     };
 });
-app.controller('UserCtrl', ['$scope', '$http', '$window', '$location', '$route', function ($scope, $http, $window, $location, $route, showErrors) {
+app.controller('UserCtrl', ['$rootScope', '$scope', '$http', '$window', '$location', '$route', '$timeout', function ($rootScope, $scope, $http, $window, $location, $route, showErrors, $timeout) {
     var us = '';
     var pass = '';
     if (!$window.sessionStorage.access_token) {
         $scope.isAuthenticated = false;
+        $rootScope.isAuthenticated = false;
     }
     else {
         $scope.isAuthenticated = true;
+        $rootScope.isAuthenticated = true;
     }
     $scope.go = function (target) {
         $location.path(target);
@@ -60,7 +68,7 @@ app.controller('UserCtrl', ['$scope', '$http', '$window', '$location', '$route',
         pass = user.password;
         var data = client_id + grant + '&username=' + us + '&password=' + pass
         $http({
-            url: 'http://127.0.0.1:5000/oauth/token?' + data,
+            url: 'http://192.168.0.2:5000/oauth/token?' + data,
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded' // Note the appropriate header
@@ -70,15 +78,17 @@ app.controller('UserCtrl', ['$scope', '$http', '$window', '$location', '$route',
                 $window.sessionStorage.access_token = data.access_token;
                 $window.sessionStorage.user = us;
                 $scope.isAuthenticated = true;
+                $rootScope.isAuthenticated = true;
                 $scope.user.username = us;
                 console.log(data);
-                $route.reload()
+                $window.location.reload();
                 $location.path('/home');
             })
             .error(function (data, status, headers, config) {
                 // Erase the token if the user fails to log in
                 delete $window.sessionStorage.access_token;
                 $scope.isAuthenticated = false;
+                $rootScope.isAuthenticated = false;
 
                 // Handle login errors here
                 $scope.show();
@@ -90,6 +100,7 @@ app.controller('UserCtrl', ['$scope', '$http', '$window', '$location', '$route',
         $scope.welcome = '';
         $scope.message = '';
         $scope.isAuthenticated = false;
+        $rootScope.isAuthenticated = false;
         delete $window.sessionStorage.access_token;
         delete $window.sessionStorage.user;
         $location.path('/');

@@ -3,7 +3,7 @@
  */
 'use strict';
 
-var app = angular.module('myApp.home', ['ngRoute', 'ngResource']);
+var app = angular.module('myApp.home', ['ngRoute', 'ngResource', "ui.bootstrap"]);
 
 app.config(['$routeProvider', '$httpProvider', '$resourceProvider', function ($routeProvider, $httpProvider, $resourceProvider) {
     $resourceProvider.defaults.stripTrailingSlashes = false;
@@ -16,33 +16,12 @@ app.config(['$routeProvider', '$httpProvider', '$resourceProvider', function ($r
     });
 }]);
 
-var userFactory = function ($resource) {
-    var user_factory = {
+app.factory('Peoples', ['Restangular', function (Restangular) {
+    return Restangular.service('peoples');
+}]);
 
-        all_users: "",
 
-        resource_users: function () {
-            var users = $resource('http://localhost:5000/peoples', {}, {
-                query: {method: 'GET'}
-            });
-            var mUsers = users.query();
-            user_factory.all_users = mUsers;
-            console.log(this.all_users);
-            return user_factory.all_users;
-        },
-        resource_user: function () {
-            var user = $resource('http://localhost:5000/peoples/:username', {username: '@id'});
-            return user;
-        }
-
-    };
-    return user_factory;
-
-};
-
-app.factory('User', ['$resource', userFactory]);
-
-app.controller('HomeCtrl', ['$scope', 'User', '$window', function ($scope, User, $window) {
+app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', function ($scope, Peoples, $window, Restangular) {
 
     if (!$window.sessionStorage.access_token) {
         $scope.isAuthenticated = false;
@@ -50,19 +29,44 @@ app.controller('HomeCtrl', ['$scope', 'User', '$window', function ($scope, User,
     else {
         $scope.isAuthenticated = true;
     }
-
-    $scope.users = {};
-    //Perform "GET http://mydomain.com/api/user/"
-    if (User.all_users.length <= 0) {
-        var user = User.resource_user();
-        user.get({username: $window.sessionStorage.user}).
-            $promise.then(function (user) {
-                $scope.users = user
+    var item = {};
+    var refresh = function () {
+        Peoples.getList().then(function (peoples) {
+            var userWithId = _.find(peoples, function (people) {
+                return people.lastname === 'Trébuchet';
             });
-    } else {
-        $scope.users = User.all_users;
-    }
+            $scope.users = userWithId;
+            $scope.users.$resolved = true;
+        });
+    };
 
+    $scope.users = refresh();
 
+    var purge = function (mData) {
+        delete mData._latest_version;
+        delete mData._id;
+        delete mData._updated;
+        delete mData._version;
+        delete mData._deleted;
+        delete mData._links;
+        delete mData._created;
+        delete mData._etag;
+        delete mData.$resolved;
+    };
+    /*    $scope.updateCursusTitle = function (data) {
+     var mData = Restangular.copy($scope.users)
+     purge(mData);
+     mData.education[0].cursus_title = data;
+     console.log('mData: '+ mData.education[0].cursus_title);
+     console.log('$scope: '+ $scope.users.education[0].cursus_title);
+     $scope.users.patch(mData);
+     $scope.users = refresh();
+     }*/
+    $scope.updateAny = function () {
+        var mData = Restangular.copy($scope.users);
+        purge(mData);
+        $scope.users.patch(mData);
+        $scope.users = refresh();
+    };
 }]);
 
