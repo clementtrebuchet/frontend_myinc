@@ -38,7 +38,7 @@
                     <h5>ABOUT</h5>
                 </div>
                 <div class="col-lg-6">
-                    <p>I'm web designer & front-end developer with 7 years of professional experience. I'm interested in
+                    <p>I'm web designer & front-End developer with 7 years of professional experience. I'm interested in
                         all kinds of visual communication, but my major focus is on designing web, mobile & tablet
                         interfaces. I also have skills in other fields like branding, icon design or web
                         development.</p>
@@ -60,13 +60,50 @@
     <section id="resume" name="resume"></section>
     <!--EDUCATION DESCRIPTION -->
     <div class="container desc">
-
+            <modal title="Add an education cursus" visible="showModal">
+                <form role="form" name="education"  ng-controller="HomeCtrl" ng-submit="addEducation(education)">
+                    <div class="form-group">
+                        <label for="cursus_title">Cursus Title</label>
+                        <input type="text" ng-model="cursus_title" class="form-control" id="cursus_title" placeholder="Enter a name for this cursus"/>
+                    </div>
+                     <div class="form-group">
+                        <label for="cursus_location.school_name">School Name</label>
+                        <input type="text" ng-model="school_name" class="form-control" id="cursus_location.school_name" placeholder="Enter the school name"/>
+                    </div>
+                     <div class="form-group">
+                        <label for="cursus_location.school_address">School Address</label>
+                        <input type="text" ng-model="school_address" class="form-control" id="cursus_location.school_address" placeholder="Enter the school address"/>
+                    </div>
+                     <div class="form-group">
+                        <label for="cursus_location.school_city">School City</label>
+                        <input type="text" ng-model="school_city" class="form-control" id="cursus_location.school_city" placeholder="Enter the school city"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="cursus_location.school_link">School Links</label>
+                        <input type="text" ng-model="school_link" class="form-control" id="cursus_location.school_link" placeholder="Enter internet school website"/>
+                    </div>
+                     <div class="form-group">
+                        <label for="cursus_date_start">Start year</label>
+                        <input type="date" ng-model="cursus_date_start" class="form-control" id="cursus_date_start" placeholder="ex 2009-01-10T00:00Z"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="cursus_date_end">End year</label>
+                        <input type="date" ng-model="cursus_date_end" class="form-control" id="cursus_date_end" placeholder="ex 2009-01-10T00:00Z"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="cursus_status">Cursus Status</label>
+                        <input type="text" ng-model="cursus_status" class="form-control" id="cursus_status" placeholder="Enter the status for this cursus"/>
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>
+            </modal>
         <div class="row">
             <div class="col-lg-2 col-lg-offset-1">
                 <h5>EDUCATION</h5>
-                <button class="btn btn-default btn-lg" ng-show="isAuthenticated">Add</button>
+                <button class="btn btn-default btn-lg"  ng-click="toggleModal()" ng-show="isAuthenticated">Add</button>
             </div>
-                  <div ng-hide="users.$resolved">
+
+            <div ng-hide="users.$resolved">
                 <i class="icon-file">Loading…</i>
 
             </div>
@@ -74,54 +111,52 @@
 
                 <div class="col-lg-6">
                     <p>
-                        <t ng-if='isAuthenticated'  editable-text="education.cursus_title" onaftersave="updateAny()">{{ education.cursus_title }}
+                        <t ng-if='isAuthenticated' editable-text="education.cursus_title" onaftersave="updateAny()">{{
+                            education.cursus_title }}
                         </t>
                         <t ng-if='!isAuthenticated'>{{ education.cursus_title }}</t>
                         <br/>
-                        <t ng-if='isAuthenticated' editable-text="education.cursus_location.school_name" onaftersave="updateAny()">{{
+                        <t ng-if='isAuthenticated' editable-text="education.cursus_location.school_name"
+                           onaftersave="updateAny()">{{
                             education.cursus_location.school_name }}
                         </t>
                         <t ng-if='!isAuthenticated'>{{ education.cursus_location.school_name }}</t>
                         <br/>
-                        <t ng-if='isAuthenticated' editable-text="education.cursus_location.school_address" onaftersave="updateAny()">{{
+                        <t ng-if='isAuthenticated' editable-text="education.cursus_location.school_address"
+                           onaftersave="updateAny()">{{
                             education.cursus_location.school_address }}
                         </t>
                         <t ng-if='!isAuthenticated'>{{ education.cursus_location.school_address }}</t>
                         <br/>
-                        <t ng-if='isAuthenticated' editable-text="education.cursus_location.school_city" onaftersave="updateAny()">{{
+                        <t ng-if='isAuthenticated' editable-text="education.cursus_location.school_city"
+                           onaftersave="updateAny()">{{
                             education.cursus_location.school_city }}
                         </t>
                         <t ng-if='!isAuthenticated'>{{ education.cursus_location.school_city }}</t>
                         <br/>
                         <a ng-if='isAuthenticated' href="{{ education.cursus_location.school_link }}"
-                           editable-url="education.cursus_location.school_link" onaftersave="updateAny()">{{ education.cursus_location.school_link
+                           editable-url="education.cursus_location.school_link" onaftersave="updateAny()">{{
+                            education.cursus_location.school_link
                             }}</a>
                         <a ng-if='!isAuthenticated' href="{{ education.cursus_location.school_link }}">{{
                             education.cursus_location.school_link }}</a>
-                        <br/>Periods : <br/>
-                        <i ng-if="isAuthenticated" editable-bsdate="education.cursus_date_start" e-is-open="data.isOpen"
-                           e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yy H:mm:ss" e-init-date="false" onaftersave="updateAny()">{{
-                            education.cursus_date_start | date:"dd/MM/yy H:mm:ss"}}</i>
-                        <i ng-if="!isAuthenticated">{{ education.cursus_date_start | date:"dd/MM/yy H:mm:ss"}}</i><br/>
-                        <i ng-if="isAuthenticated" editable-bsdate="education.cursus_date_end" e-is-open="data.isOpen"
-                           e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yy H:mm:ss" e-init-date="false">{{
-                            education.cursus_date_end |date:"dd/MM/yy H:mm:ss"}}</i>
-                        <i ng-if="!isAuthenticated">{{ education.cursus_date_end | date:"dd/MM/yy H:mm:ss"}}</i>
+                        <br/>
+                        <i ng-if="isAuthenticated" editable-datetime="education.cursus_date_start"
+                           onaftersave="updateAny()">Start: {{ education.cursus_date_start |date:"yyyy-MM-dd" }}</i>
+                        <i ng-if="!isAuthenticated">Start: {{ education.cursus_date_start | date:"yyyy-MM-dd"}}</i><br/>
+                        <i ng-if="isAuthenticated" editable-datetime="education.cursus_date_end"
+                           onaftersave="updateAny()">End: {{education.cursus_date_end |date:"yyyy-MM-dd" }}</i>
+                        <i ng-if="!isAuthenticated">End: {{ education.cursus_date_end | date:"yyyy-MM-dd"}}</i><br/>
                     </p>
                 </div>
                 <div class="col-lg-3">
                     <p>
-                        <sm ng-if="isAuthenticated" editable-bsdate="education.cursus_date_end" e-is-open="data.isOpen"
-                            e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yy H:mm:ss" e-init-date="false" onaftersave="updateAny()">
-                            GRADUATING IN {{ education.cursus_date_end | date:"dd/MM/yy H:mm:ss"}}
-                        </sm>
-                        <sm ng-if="!isAuthenticated">GRADUATING IN : {{ education.cursus_date_end | date:"dd/MM/yy
-                            H:mm:ss"}}
-                        </sm>
+                        <sm>GRADUATING IN : {{ education.cursus_date_end | date:"yyyy-MM-dd"}}</sm>
 
                         <br/>
                         <imp>
-                            <sm ng-if='isAuthenticated' editable-text="education.cursus_status" onaftersave="updateAny()">{{
+                            <sm ng-if='isAuthenticated' editable-text="education.cursus_status"
+                                onaftersave="updateAny()">{{
                                 education.cursus_status | uppercase }}
                             </sm>
                             <sm ng-if='!isAuthenticated'>{{ education.cursus_status | uppercase }}</sm>
@@ -149,7 +184,7 @@
             </div>
             <div class="col-lg-6">
                 <p>
-                    <t>Front-end Developer</t>
+                    <t>Front-End Developer</t>
                     <br/>
                     Black Tie Corp. <br/>
                 </p>
@@ -279,7 +314,7 @@
                         been the industry's standard dummy text ever since the 1500s, when an unknown printer
                         took a
                         galley of type and scrambled it to make a type specimen book.<br/><br/>
-                        <sm><i class="icon-tag"></i> front-end</sm>
+                        <sm><i class="icon-tag"></i> front-End</sm>
                     </more>
                 </p>
             </div>
