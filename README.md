@@ -1,5 +1,4 @@
-# frontend_myinc — personal AngularJS apps
-
+#frontend_myinc — Company Promotional Angular Rest Application
 
 <a href="#">eve server returning a get request</a>
 
@@ -17,7 +16,7 @@ Accept-Language: fr,en;q=0.8
 Content-Type: 
 Accept-Encoding: gzip, deflate, sdch</pre>
 
-##Preview
+##WebSite Preview
 ###Welcome
 <img src="https://cloud.githubusercontent.com/assets/8559910/12053465/b09a4a4c-af19-11e5-8fe9-0b226953259a.png"></img>
 ###Login
