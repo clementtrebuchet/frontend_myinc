@@ -9,6 +9,8 @@ var app = angular.module('myApp', [
     'restangular',
     "xeditable",
     "ui.bootstrap",
+    'ngAnimate',
+    'ngSanitize',
     'myApp.welcome',
     'myApp.home',
     'myApp.admin',

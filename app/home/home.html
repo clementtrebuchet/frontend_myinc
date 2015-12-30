@@ -37,13 +37,14 @@
                 <div class="col-lg-2 col-lg-offset-1">
                     <h5>ABOUT</h5>
                 </div>
-                <div class="col-lg-6">
-                    <p ng-if='!isAuthenticated'>{{ users.about }}</p>
-                    <a href="#" ng-if='isAuthenticated' editable-textarea="users.about" e-style="color: green" e-rows="10" e-cols="60" onaftersave="updateAny()">
+                <div class="col-lg-7">
+                    <p ng-bind-html="users.about" ng-if='!isAuthenticated'>{{ users.about }}</p>
+                    <a href="#" ng-if='isAuthenticated' editable-textarea="users.about" e-style="color: green"
+                       e-rows="10" e-cols="60" onaftersave="updateAny()">
                         <pre>{{ users.about }}</pre>
                     </a>
                 </div>
-                <div class="col-lg-3">
+                <div class="col-lg-2">
                     <p><a href="#"><i class="icon-file"></i></a>
                         <sm>DOWNLOAD PDF</sm>
                     </p>
@@ -56,11 +57,20 @@
     </div>
     <!--/ #intro -->
 
-
     <section id="resume" name="resume"></section>
+    <div class="container desc">
+        <div modal="success_modal">
+            <div class="col-sm-4">
+                <div style="font-size: 36px" class="alert alert-success" ng-animate="'animate'"
+                     ng-hide="update_success === false">
+                    <span class="label label-success label-as-badge">update success</span>
+                </div>
+            </div>
+        </div>
+    </div>
     <!--EDUCATION DESCRIPTION -->
     <div class="container desc">
-            <!--Modal education form -->
+        <!--Modal education form -->
         <modal title="Add an education cursus" visible="showModal">
             <form role="form" name="education" ng-controller="HomeCtrl" ng-submit="addEducation(education)">
                 <div class="form-group">
@@ -107,7 +117,9 @@
             </form>
         </modal>
         <h5>EDUCATION</h5>
-        <button class="btn btn-default btn-lg" ng-click="toggleModal()" ng-show="isAuthenticated">Add</button>
+
+        <button class="btn btn-default btn-lg" ng-click="toggleModal()" ng-show="isAuthenticated"><span
+                class="glyphicon glyphicon-plus-sign"></span></button>
         <div class="row" ng-repeat="education in users.education">
             <div class="col-lg-2 col-lg-offset-1">
 
@@ -118,7 +130,7 @@
                 <div class="col-lg-6">
                     <p>
                         <t ng-if='isAuthenticated' editable-text="education.cursus_title" onaftersave="updateAny()">{{
-                            education.cursus_title |  uppercase}}
+                            education.cursus_title | uppercase}}
                         </t>
                         <t ng-if='!isAuthenticated'>{{ education.cursus_title }}</t>
                         <br/>
@@ -148,17 +160,20 @@
                             education.cursus_location.school_link }}</a>
                         <br/>
                         <i ng-if="isAuthenticated" editable-bsdate="education.cursus_date_start" e-is-open="data.isOpen"
-                            e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yyyy hh:mm:ss" e-init-date="false" onaftersave="updateAny()"">Start: {{ education.cursus_date_start |date:"yyyy-MM-dd" }}</i>
+                           e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yyyy hh:mm:ss" e-init-date="false"
+                           onaftersave="updateAny()">Start: {{ education.cursus_date_start |date:"dd/MM/yyyy" }}</i>
                         <i ng-if="!isAuthenticated">Start: {{ education.cursus_date_start | date:"dd/MM/yyyy"}}</i><br/>
                         <i ng-if="isAuthenticated" editable-bsdate="education.cursus_date_end" e-is-open="data.isOpen"
-                            e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yyyy hh:mm:ss" e-init-date="false" onaftersave="updateAny()"">End: {{education.cursus_date_end |date:"yyyy-MM-dd" }}</i>
+                           e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yyyy hh:mm:ss" e-init-date="false"
+                           onaftersave="updateAny()">End: {{education.cursus_date_end |date:"dd/MM/yyyy" }}</i>
                         <i ng-if="!isAuthenticated">End: {{ education.cursus_date_end | date:"dd/MM/yyyy"}}</i><br/>
                     </p>
                 </div>
                 <div class="col-lg-3">
                     <p>
                         <sm ng-if="isAuthenticated" editable-bsdate="education.cursus_date_end" e-is-open="data.isOpen"
-                            e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yyyy hh:mm:ss" e-init-date="false" onaftersave="updateAny()">
+                            e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yyyy hh:mm:ss" e-init-date="false"
+                            onaftersave="updateAny()">
                             GRADUATING IN {{ education.cursus_date_end | date:"dd/MM/yyyy"}}
                         </sm>
                         <sm ng-if="!isAuthenticated">GRADUATING IN : {{ education.cursus_date_end | date:"dd/MM/yy"}}
@@ -174,6 +189,7 @@
 
                         </imp>
                     </p>
+
                 </div>
 
             </div>
@@ -183,7 +199,6 @@
         <hr>
     </div>
     <!--/.container -->
-
 
     <!--WORK DESCRIPTION -->
     <div class="container desc">

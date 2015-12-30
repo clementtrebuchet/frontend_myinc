@@ -21,7 +21,7 @@ app.factory('Peoples', ['Restangular', function (Restangular) {
 }]);
 
 
-app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', function ($scope, Peoples, $window, Restangular) {
+app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$timeout', function ($scope, Peoples, $window, Restangular, $timeout) {
 
     if (!$window.sessionStorage.access_token) {
         $scope.isAuthenticated = false;
@@ -30,10 +30,15 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', funct
         $scope.isAuthenticated = true;
     }
     $scope.showModal = false;
+    $scope.success_modal = false;
+
     $scope.toggleModal = function () {
         $scope.showModal = !$scope.showModal;
     };
     var item = {};
+    $scope.users = {};
+
+
     var refresh = function () {
         Peoples.getList().then(function (peoples) {
             var userWithId = _.find(peoples, function (people) {
@@ -41,7 +46,13 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', funct
             });
             $scope.users = userWithId;
             $scope.users.$resolved = true;
+            $scope.update_success = false;
+            $scope.success_modal = false;
         });
+    };
+
+    var successmodal = function(){
+        $scope.success_modal = true;
     };
     $scope.form = {};
     $scope.users = refresh();
@@ -83,6 +94,8 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', funct
         delete mData._created;
         delete mData._etag;
         delete mData.$resolved;
+        delete mData.$update_success;
+        delete mData.success_modal;
     };
     var edu = {
         "cursus_date_end": new Date("2009-07-10T00:00:00Z"),
@@ -116,8 +129,20 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', funct
     $scope.updateAny = function () {
         var mData = Restangular.copy($scope.users);
         purge(mData);
-        $scope.users.patch(mData);
-        $scope.users = refresh();
+        try {
+            $scope.users.patch(mData);
+            $scope.users = refresh();
+            $scope.update_success = true;
+            successmodal();
+            $timeout(function(){
+               $scope.users = refresh();
+            }, 3000, false);
+
+
+        } catch (e){
+            console.log('update error.... : '+ e);
+        }
+
     };
 }]);
 app.directive('modal', function () {
