@@ -274,7 +274,7 @@ a:after {
 .desc imp {
 	padding: 6px;
 	color: white;
-	background: #34495e;
+	background: rgba(0, 128, 9, 0.36);
 }
 
 .desc more {
