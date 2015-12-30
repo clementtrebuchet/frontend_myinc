@@ -200,54 +200,78 @@
     </div>
     <!--/.container -->
 
+    <!--Modal work form -->
+    <modal title="Add a work experience" visible="showModale">
+        <form role="form" name="work" ng-controller="HomeCtrl" ng-submit="addWork(work)">
+            <div class="form-group">
+                <label for="company_name">Entreprise Name</label>
+                <input type="text" ng-model="company_name" class="form-control" id="company_name"
+                       placeholder="Enter a name for company"/>
+            </div>
+            <div class="form-group">
+                <label for="title">Work position</label>
+                <input type="text" ng-model="title" class="form-control" id="title"
+                       placeholder="Enter your work position"/>
+            </div>
+            <div class="form-group">
+                <label for="area">Work place</label>
+                <input type="text" ng-model="area" class="form-control" id="area"
+                       placeholder="Enter the work place"/>
+            </div>
+            <div class="form-group">
+                <label for="start">Start year</label>
+                <input type="date" ng-model="start" class="form-control" id="start"
+                       placeholder="ex 2009-01-10T00:00Z"/>
+            </div>
+            <div class="form-group">
+                <label for="end">End year</label>
+                <input type="date" ng-model="end" class="form-control" id="end"
+                       placeholder="ex 2009-01-10T00:00Z"/>
+            </div>
+            <div class="form-group">
+                <label for="actual"> Is this work currrent ?</label>
+                <input type="checkbox" ng-model="actual" class="form-control" id="actual"/>
+            </div>
+            <div class="form-group">
+                <label for="description">Work description</label>
+                    <textarea ng-model="description" class="form-control" id="description"
+                              placeholder="Enter the description for this work"></textarea>
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+        </form>
+    </modal>
     <!--WORK DESCRIPTION -->
     <div class="container desc">
-        <div class="row">
+        <h5>WORK</h5>
+        <button class="btn btn-default btn-lg" ng-click="toggleModale()" ng-show="isAuthenticated"><span
+                class="glyphicon glyphicon-plus-sign"></span></button>
+        <div class="row" ng-repeat="work in users.works">
 
             <div class="col-lg-2 col-lg-offset-1">
-                <h5>WORK</h5>
+
             </div>
             <div class="col-lg-6">
                 <p>
-                    <t>Front-End Developer</t>
+                    <t>{{ work.title }}</t>
                     <br/>
-                    Black Tie Corp. <br/>
+                    {{ work.company_name }} <br/>
                 </p>
                 <p>
-                    <more>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                        has
-                        been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                        took a
-                        galley of type and scrambled it to make a type specimen book.
-                    </more>
+                    <more ng-bind-html="work.description">{{ work.description }}</more>
                 </p>
             </div>
             <div class="col-lg-3">
                 <p>
-                    <sm>AUGUST 2012 - CURRENT</sm>
+                    <sm>{{ work.start | date:"dd/MM/yyyy" }} - {{ work.end | date:"dd/MM/yyyy" }}</sm>
+                </p>
+                <p>
+                    <sm ng-hide="work.actual === false" class="alert alert-info">
+                        <input type="radio" checked="{{ work.actual }}" disabled/>
+                         This is my actual work
+                    </sm>
                 </p>
             </div>
 
-            <div class="col-lg-6 col-lg-offset-3">
-                <p>
-                    <t>Web Designer - Intern</t>
-                    <br/>
-                    Onassis Ltd. <br/>
-                </p>
-                <p>
-                    <more>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                        has
-                        been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                        took a
-                        galley of type and scrambled it to make a type specimen book.
-                    </more>
-                </p>
-            </div>
-            <div class="col-lg-3">
-                <p>
-                    <sm>JUNE 2010 - JULY 2012</sm>
-                </p>
-            </div>
         </div>
         <!--/.row -->
         <br>

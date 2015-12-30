@@ -30,10 +30,14 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
         $scope.isAuthenticated = true;
     }
     $scope.showModal = false;
+    $scope.showModale = false;
     $scope.success_modal = false;
 
     $scope.toggleModal = function () {
         $scope.showModal = !$scope.showModal;
+    };
+    $scope.toggleModale = function () {
+        $scope.showModale = !$scope.showModale;
     };
     var item = {};
     $scope.users = {};
@@ -51,7 +55,7 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
         });
     };
 
-    var successmodal = function(){
+    var successmodal = function () {
         $scope.success_modal = true;
     };
     $scope.form = {};
@@ -82,6 +86,27 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
         purge(mData);
         $scope.users.patch(mData);
         $scope.users = refresh();
+    };
+
+    $scope.addWork = function (myForm) {
+        if (typeof($scope.users.works) === "undefined"){
+            $scope.users.works = [];
+        }
+        var myWork = myForm;
+        work.company_name = $scope.company_name;
+        work.title = $scope.title;
+        work.area = $scope.area;
+        work.start = new Date($scope.start);
+        work.end = new Date($scope.end);
+        work.actual = $scope.actual;
+        work.description = $scope.description;
+        $scope.users.works.push(work);
+        var mData = Restangular.copy($scope.users);
+        purge(mData);
+        $scope.users.patch(mData);
+        $scope.users = refresh();
+        $scope.toggleModale();
+
     };
 
     var purge = function (mData) {
@@ -117,6 +142,16 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
         },
         "cursus_status": "validate"
     };
+
+    var work = {
+        'company_name': "",
+        'title': "",
+        'area': "",
+        'start': new Date(),
+        'end': new Date(),
+        'actual': false,
+        'description':""
+    };
     /*    $scope.updateCursusTitle = function (data) {
      var mData = Restangular.copy($scope.users)
      purge(mData);
@@ -134,13 +169,13 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
             $scope.users = refresh();
             $scope.update_success = true;
             successmodal();
-            $timeout(function(){
-               $scope.users = refresh();
+            $timeout(function () {
+                $scope.users = refresh();
             }, 3000, false);
 
 
-        } catch (e){
-            console.log('update error.... : '+ e);
+        } catch (e) {
+            console.log('update error.... : ' + e);
         }
 
     };
