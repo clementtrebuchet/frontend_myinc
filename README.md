@@ -17,3 +17,12 @@ Accept-Language: fr,en;q=0.8
 Content-Type: 
 Accept-Encoding: gzip, deflate, sdch</pre>
 
+##Preview
+###Welcome
+<img src="https://cloud.githubusercontent.com/assets/8559910/12053465/b09a4a4c-af19-11e5-8fe9-0b226953259a.png"></img>
+###CV
+<img src="https://cloud.githubusercontent.com/assets/8559910/12053377/d1270dfa-af18-11e5-9a07-457cab6a42b5.png"></img> 
+###Login
+<img src="https://cloud.githubusercontent.com/assets/8559910/12053439/6703c976-af19-11e5-8bfa-ca485e59a425.png"></img>
+###Update
+<img src="https://cloud.githubusercontent.com/assets/8559910/12053477/dd3fdbe8-af19-11e5-8681-ea948f8eb519.png"></img>
