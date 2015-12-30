@@ -21,7 +21,7 @@ app.factory('Peoples', ['Restangular', function (Restangular) {
 }]);
 
 
-app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$timeout', function ($scope, Peoples, $window, Restangular, $timeout) {
+app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$timeout', '$filter', function ($scope, Peoples, $window, Restangular, $timeout, $filter) {
 
     if (!$window.sessionStorage.access_token) {
         $scope.isAuthenticated = false;
@@ -42,6 +42,16 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
     var item = {};
     $scope.users = {};
 
+    $scope.statuses = [
+        {value: Boolean(true), text: 'oui'},
+        {value: Boolean(false), text: 'non'}
+    ];
+
+    $scope.showStatus = function (element) {
+        var selected = $filter('filter')($scope.statuses, {value: element});
+        console.log($scope.users.works.actual);
+        return (element && selected.length) ? selected[0].text : 'Not set';
+    };
 
     var refresh = function () {
         Peoples.getList().then(function (peoples) {
@@ -89,9 +99,14 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
     };
 
     $scope.addWork = function (myForm) {
-        if (typeof($scope.users.works) === "undefined"){
+        if (typeof($scope.users.works) === "undefined") {
             $scope.users.works = [];
         }
+
+        if (typeof($scope.actual) === "undefined") {
+            $scope.actual = false;
+        }
+
         var myWork = myForm;
         work.company_name = $scope.company_name;
         work.title = $scope.title;
@@ -99,13 +114,15 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
         work.start = new Date($scope.start);
         work.end = new Date($scope.end);
         work.actual = $scope.actual;
+        console.log($scope.actual);
         work.description = $scope.description;
         $scope.users.works.push(work);
         var mData = Restangular.copy($scope.users);
         purge(mData);
         $scope.users.patch(mData);
+        myForm.modal('hide');
         $scope.users = refresh();
-        $scope.toggleModale();
+
 
     };
 
@@ -150,7 +167,7 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
         'start': new Date(),
         'end': new Date(),
         'actual': false,
-        'description':""
+        'description': ""
     };
     /*    $scope.updateCursusTitle = function (data) {
      var mData = Restangular.copy($scope.users)

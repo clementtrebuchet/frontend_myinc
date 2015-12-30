@@ -120,76 +120,96 @@
 
         <button class="btn btn-default btn-lg" ng-click="toggleModal()" ng-show="isAuthenticated"><span
                 class="glyphicon glyphicon-plus-sign"></span></button>
+        <br/>
+
         <div class="row" ng-repeat="education in users.education">
-            <div class="col-lg-2 col-lg-offset-1">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="panel-info">
+                        <div class="col-lg-2 col-lg-offset-1">
 
-            </div>
-            <div ng-hide="users.$resolved"><i class="icon-file">Loading…</i></div>
-            <div>
+                        </div>
+                        <div ng-hide="users.$resolved"><i class="icon-file">Loading…</i></div>
+                        <div>
 
-                <div class="col-lg-6">
-                    <p>
-                        <t ng-if='isAuthenticated' editable-text="education.cursus_title" onaftersave="updateAny()">{{
-                            education.cursus_title | uppercase}}
-                        </t>
-                        <t ng-if='!isAuthenticated'>{{ education.cursus_title }}</t>
-                        <br/>
-                        <t ng-if='isAuthenticated' editable-text="education.cursus_location.school_name"
-                           onaftersave="updateAny()">{{
-                            education.cursus_location.school_name }}
-                        </t>
-                        <t ng-if='!isAuthenticated'>{{ education.cursus_location.school_name }}</t>
-                        <br/>
-                        <t ng-if='isAuthenticated' editable-text="education.cursus_location.school_address"
-                           onaftersave="updateAny()">{{
-                            education.cursus_location.school_address }}
-                        </t>
-                        <t ng-if='!isAuthenticated'>{{ education.cursus_location.school_address }}</t>
-                        <br/>
-                        <t ng-if='isAuthenticated' editable-text="education.cursus_location.school_city"
-                           onaftersave="updateAny()">{{
-                            education.cursus_location.school_city }}
-                        </t>
-                        <t ng-if='!isAuthenticated'>{{ education.cursus_location.school_city }}</t>
-                        <br/>
-                        <a ng-if='isAuthenticated' href="{{ education.cursus_location.school_link }}"
-                           editable-url="education.cursus_location.school_link" onaftersave="updateAny()">{{
-                            education.cursus_location.school_link
-                            }}</a>
-                        <a ng-if='!isAuthenticated' href="{{ education.cursus_location.school_link }}">{{
-                            education.cursus_location.school_link }}</a>
-                        <br/>
-                        <i ng-if="isAuthenticated" editable-bsdate="education.cursus_date_start" e-is-open="data.isOpen"
-                           e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yyyy hh:mm:ss" e-init-date="false"
-                           onaftersave="updateAny()">Start: {{ education.cursus_date_start |date:"dd/MM/yyyy" }}</i>
-                        <i ng-if="!isAuthenticated">Start: {{ education.cursus_date_start | date:"dd/MM/yyyy"}}</i><br/>
-                        <i ng-if="isAuthenticated" editable-bsdate="education.cursus_date_end" e-is-open="data.isOpen"
-                           e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yyyy hh:mm:ss" e-init-date="false"
-                           onaftersave="updateAny()">End: {{education.cursus_date_end |date:"dd/MM/yyyy" }}</i>
-                        <i ng-if="!isAuthenticated">End: {{ education.cursus_date_end | date:"dd/MM/yyyy"}}</i><br/>
-                    </p>
-                </div>
-                <div class="col-lg-3">
-                    <p>
-                        <sm ng-if="isAuthenticated" editable-bsdate="education.cursus_date_end" e-is-open="data.isOpen"
-                            e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yyyy hh:mm:ss" e-init-date="false"
-                            onaftersave="updateAny()">
-                            GRADUATING IN {{ education.cursus_date_end | date:"dd/MM/yyyy"}}
-                        </sm>
-                        <sm ng-if="!isAuthenticated">GRADUATING IN : {{ education.cursus_date_end | date:"dd/MM/yy"}}
-                        </sm>
+                            <div class="col-lg-6">
+                                <p>
+                                    <t ng-if='isAuthenticated' editable-text="education.cursus_title"
+                                       onaftersave="updateAny()">{{
+                                        education.cursus_title | uppercase}}
+                                    </t>
+                                    <t ng-if='!isAuthenticated'>{{ education.cursus_title }}</t>
+                                    <br/>
+                                    <t ng-if='isAuthenticated' editable-text="education.cursus_location.school_name"
+                                       onaftersave="updateAny()">{{
+                                        education.cursus_location.school_name }}
+                                    </t>
+                                    <t ng-if='!isAuthenticated'>{{ education.cursus_location.school_name }}</t>
+                                    <br/>
+                                    <t ng-if='isAuthenticated' editable-text="education.cursus_location.school_address"
+                                       onaftersave="updateAny()">{{
+                                        education.cursus_location.school_address }}
+                                    </t>
+                                    <t ng-if='!isAuthenticated'>{{ education.cursus_location.school_address }}</t>
+                                    <br/>
+                                    <t ng-if='isAuthenticated' editable-text="education.cursus_location.school_city"
+                                       onaftersave="updateAny()">{{
+                                        education.cursus_location.school_city }}
+                                    </t>
+                                    <t ng-if='!isAuthenticated'>{{ education.cursus_location.school_city }}</t>
+                                    <br/>
+                                    <a ng-if='isAuthenticated' href="{{ education.cursus_location.school_link }}"
+                                       editable-url="education.cursus_location.school_link" onaftersave="updateAny()">{{
+                                        education.cursus_location.school_link
+                                        }}</a>
+                                    <a ng-if='!isAuthenticated' href="{{ education.cursus_location.school_link }}">{{
+                                        education.cursus_location.school_link }}</a>
+                                    <br/>
+                                    <i ng-if="isAuthenticated" editable-bsdate="education.cursus_date_start"
+                                       e-is-open="data.isOpen"
+                                       e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yyyy hh:mm:ss"
+                                       e-init-date="false"
+                                       onaftersave="updateAny()">Start: {{ education.cursus_date_start
+                                        |date:"dd/MM/yyyy" }}</i>
+                                    <i ng-if="!isAuthenticated">Start: {{ education.cursus_date_start |
+                                        date:"dd/MM/yyyy"}}</i><br/>
+                                    <i ng-if="isAuthenticated" editable-bsdate="education.cursus_date_end"
+                                       e-is-open="data.isOpen"
+                                       e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yyyy hh:mm:ss"
+                                       e-init-date="false"
+                                       onaftersave="updateAny()">End: {{education.cursus_date_end |date:"dd/MM/yyyy"
+                                        }}</i>
+                                    <i ng-if="!isAuthenticated">End: {{ education.cursus_date_end |
+                                        date:"dd/MM/yyyy"}}</i><br/>
+                                </p>
+                            </div>
+                            <div class="col-lg-3">
+                                <p>
+                                    <sm ng-if="isAuthenticated" editable-bsdate="education.cursus_date_end"
+                                        e-is-open="data.isOpen"
+                                        e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yyyy hh:mm:ss"
+                                        e-init-date="false"
+                                        onaftersave="updateAny()">
+                                        GRADUATING IN {{ education.cursus_date_end | date:"dd/MM/yyyy"}}
+                                    </sm>
+                                    <sm ng-if="!isAuthenticated">GRADUATING IN : {{ education.cursus_date_end |
+                                        date:"dd/MM/yy"}}
+                                    </sm>
 
-                        <br/>
-                        <imp>
-                            <sm ng-if='isAuthenticated' e-style="color: green" editable-text="education.cursus_status"
-                                onaftersave="updateAny()">{{
-                                education.cursus_status | uppercase }}
-                            </sm>
-                            <sm ng-if='!isAuthenticated'>{{ education.cursus_status | uppercase }}</sm>
+                                    <br/>
+                                    <imp>
+                                        <sm ng-if='isAuthenticated' e-style="color: green"
+                                            editable-text="education.cursus_status"
+                                            onaftersave="updateAny()">{{
+                                            education.cursus_status | uppercase }}
+                                        </sm>
+                                        <sm ng-if='!isAuthenticated'>{{ education.cursus_status | uppercase }}</sm>
 
-                        </imp>
-                    </p>
-
+                                    </imp>
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
             </div>
@@ -245,36 +265,73 @@
         <h5>WORK</h5>
         <button class="btn btn-default btn-lg" ng-click="toggleModale()" ng-show="isAuthenticated"><span
                 class="glyphicon glyphicon-plus-sign"></span></button>
+        <br/>
+
         <div class="row" ng-repeat="work in users.works">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div class="panel-info">
+                        <div class="col-lg-2 col-lg-offset-1">
 
-            <div class="col-lg-2 col-lg-offset-1">
-
+                        </div>
+                        <div class="col-lg-6">
+                            <p ng-if='!isAuthenticated'>
+                                <t>{{ work.title }}</t>
+                                <br/>
+                                {{ work.company_name }} <br/>
+                            </p>
+                            <p ng-if='isAuthenticated' editable-text="work.company_name"
+                               onaftersave="updateAny()">
+                                <t editable-text="work.title" onaftersave="updateAny()">{{ work.title }}</t>
+                                <br/>
+                                {{ work.company_name }} <br/>
+                            </p>
+                            <p ng-if='!isAuthenticated'>
+                                <more ng-bind-html="work.description">{{ work.description }}</more>
+                            </p>
+                            <a href="#" ng-if='isAuthenticated' editable-textarea="work.description"
+                               e-style="color: green"
+                               e-rows="10" e-cols="60" onaftersave="updateAny()">
+                                <pre>{{ work.description }}</pre>
+                            </a>
+                        </div>
+                        <div class="col-lg-3">
+                            <p>
+                                <sm ng-if='!isAuthenticated'>{{ work.start | date:"MM/yyyy" }} - {{ work.end |
+                                    date:"MM/yyyy" }}
+                                </sm>
+                                <sm ng-if="isAuthenticated" editable-bsdate="work.start"
+                                    e-is-open="data.isOpen"
+                                    e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yyyy hh:mm:ss"
+                                    e-init-date="false"
+                                    onaftersave="updateAny()">{{ work.start | date:"MM/yyyy" }}
+                                </sm>
+                                <sm ng-if="isAuthenticated" editable-bsdate="work.end"
+                                    e-is-open="data.isOpen"
+                                    e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yyyy hh:mm:ss"
+                                    e-init-date="false"
+                                    onaftersave="updateAny()">{{ work.end | date:"MM/yyyy" }}
+                                </sm>
+                            </p>
+                            <p>
+                                <sm ng-if='!isAuthenticated' ng-hide="work.actual === false || work.actual === 'false'" class="alert alert-info">
+                                    <input type="radio" checked="{{ work.actual }}" disabled/>
+                                    This is my actual work
+                                </sm>
+                                <sm ng-if='isAuthenticated' name="act" editable-radiolist="work.actual"
+                                    ng-hide="work.actual === false || work.actual === 'false'" class="alert alert-info"  e-ng-options="s.value as s.text for s in statuses"
+                                        onaftersave="updateAny()">
+                                    <input type="radio" checked="{{ work.actual }}"/>
+                                    This is my actual work
+                                </sm>
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-lg-6">
-                <p>
-                    <t>{{ work.title }}</t>
-                    <br/>
-                    {{ work.company_name }} <br/>
-                </p>
-                <p>
-                    <more ng-bind-html="work.description">{{ work.description }}</more>
-                </p>
-            </div>
-            <div class="col-lg-3">
-                <p>
-                    <sm>{{ work.start | date:"dd/MM/yyyy" }} - {{ work.end | date:"dd/MM/yyyy" }}</sm>
-                </p>
-                <p>
-                    <sm ng-hide="work.actual === false" class="alert alert-info">
-                        <input type="radio" checked="{{ work.actual }}" disabled/>
-                         This is my actual work
-                    </sm>
-                </p>
-            </div>
-
         </div>
         <!--/.row -->
-        <br>
+        <br/>
         <hr>
     </div>
     <!--/.container -->

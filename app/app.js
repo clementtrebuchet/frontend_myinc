@@ -98,7 +98,7 @@ app.factory('authInterceptor', function ($rootScope, $q, $window) {
     return {
 
         request: function (config) {
-            console.log('intercept this config: ' + config);
+            //console.log('intercept this config: ' + config);
             config.headers = config.headers || {};
             if ($window.sessionStorage.access_token) {
                 config.headers.Authorization = 'Bearer ' + $window.sessionStorage.access_token;
