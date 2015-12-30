@@ -104,7 +104,7 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
         }
 
         if (typeof($scope.actual) === "undefined") {
-            $scope.actual = false;
+            $scope.actual = Boolean(true);
         }
 
         var myWork = myForm;
@@ -120,7 +120,7 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
         var mData = Restangular.copy($scope.users);
         purge(mData);
         $scope.users.patch(mData);
-        myForm.modal('hide');
+        console.log(myForm);
         $scope.users = refresh();
 
 

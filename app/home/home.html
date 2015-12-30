@@ -280,11 +280,11 @@
                                 <br/>
                                 {{ work.company_name }} <br/>
                             </p>
-                            <p ng-if='isAuthenticated' editable-text="work.company_name"
-                               onaftersave="updateAny()">
+                            <p ng-if='isAuthenticated'>
                                 <t editable-text="work.title" onaftersave="updateAny()">{{ work.title }}</t>
                                 <br/>
-                                {{ work.company_name }} <br/>
+                                <a href="#" editable-text="work.company_name"
+                               onaftersave="updateAny()">{{ work.company_name }}</a> <br/>
                             </p>
                             <p ng-if='!isAuthenticated'>
                                 <more ng-bind-html="work.description">{{ work.description }}</more>
