@@ -59,6 +59,12 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
                 return people.lastname === 'Trébuchet';
             });
             $scope.users = userWithId;
+            //sort works array by date -1
+            var originalWorksArray = $scope.users.works;
+            var sortedWorksArray = originalWorksArray.sort(sortWorksArray);
+            var originalEductionArray = $scope.users.education;
+            var sortedEducationArray = originalEductionArray.sort(sortEducationArray);
+            console.log(sortedWorksArray);
             $scope.users.$resolved = true;
             $scope.update_success = false;
             $scope.success_modal = false;
@@ -238,16 +244,21 @@ app.directive('modal', function () {
         }
     };
 });
-//.directive('datepickerPopup', function (){
-//    return {
-//        restrict: 'EAC',
-//        require: 'ngModel',
-//        link: function(scope, element, attr, controller) {
-//      //remove the default formatter from the input directive to prevent conflict
-//      controller.$formatters.shift();
-//  }
-//}
-//});
+// sorting 1 ( ? -1 : 1)
+// sorting -1 (? 1 : -1)
+function sortWorksArray(a,b){
+    var dateA = new Date(a.start).getTime();
+    var dateB = new Date(b.start).getTime();
+    return dateA > dateB ? -1 : 1;
+
+};
+function sortEducationArray(a,b){
+    var dateA = new Date(a.cursus_date_start).getTime();
+    var dateB = new Date(b.cursus_date_start).getTime();
+    return dateA > dateB ? -1 : 1;
+
+};
+
 
 
 

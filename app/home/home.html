@@ -318,9 +318,7 @@
                                     <input type="radio" checked="{{ work.actual }}" disabled/>
                                     This is my actual work
                                 </sm>
-                                <sm ng-if='isAuthenticated' name="act" editable-radiolist="work.actual"
-                                    ng-hide="work.actual === false || work.actual === 'false'" class="alert alert-info"  e-ng-options="s.value as s.text for s in statuses"
-                                        onaftersave="updateAny()">
+                                <sm ng-if='isAuthenticated' name="act" editable-radiolist="work.actual" class="alert alert-info"  e-ng-options="s.value as s.text for s in statuses" onaftersave="updateAny()">
                                     <input type="radio" checked="{{ work.actual }}"/>
                                     This is my actual work
                                 </sm>
