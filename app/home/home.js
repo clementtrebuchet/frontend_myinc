@@ -20,8 +20,13 @@ app.factory('Peoples', ['Restangular', function (Restangular) {
     return Restangular.service('peoples');
 }]);
 
+app.factory('Skills', ['Restangular', function (Restangular) {
+    return Restangular.service('skills');
+}]);
 
-app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$timeout', '$filter', function ($scope, Peoples, $window, Restangular, $timeout, $filter) {
+
+app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$timeout', '$filter', 'Skills',
+    function ($scope, Peoples, $window, Restangular, $timeout, $filter, Skills) {
 
     if (!$window.sessionStorage.access_token) {
         $scope.isAuthenticated = false;
@@ -41,6 +46,7 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
     };
     var item = {};
     $scope.users = {};
+    $scope.skills= {};
 
     $scope.statuses = [
         {value: Boolean(true), text: 'oui'},
@@ -64,18 +70,31 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
             var sortedWorksArray = originalWorksArray.sort(sortWorksArray);
             var originalEductionArray = $scope.users.education;
             var sortedEducationArray = originalEductionArray.sort(sortEducationArray);
-            console.log(sortedWorksArray);
             $scope.users.$resolved = true;
             $scope.update_success = false;
             $scope.success_modal = false;
         });
     };
 
+        function refresh_skills() {
+            var m = [];
+            Skills.getList().then(function(skills){
+                var skillWhithId = _.find(skills, function(skill){
+                    if (skill.owner === $scope.users._id){
+                        m.push(skill);
+                    }
+                });
+                $scope.skills = m;
+                console.log( $scope.skills);
+            });
+
+    };
     var successmodal = function () {
         $scope.success_modal = true;
     };
     $scope.form = {};
     $scope.users = refresh();
+    $scope.skills = refresh_skills()
     $scope.addEducation = function (myForm) {
         var myEdu = myForm;
         console.log(myEdu);
@@ -175,6 +194,41 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
         'actual': false,
         'description': ""
     };
+
+    $scope.removeEducation = function (start, end) {
+        console.log(start);
+        console.log(end);
+        var newScopeEdu = remove_embedded_education($scope.users.education, start, end);
+        delete $scope.users.education;
+        $scope.users.education = newScopeEdu;
+        $scope.updateAny();
+
+    };
+
+    $scope.removeWorks = function (start, end) {
+        console.log(start);
+        console.log(end);
+        var newScopeEdu = remove_embedded_works($scope.users.works, start, end);
+        delete $scope.users.works;
+        $scope.users.works = newScopeEdu;
+        $scope.updateAny();
+
+    };
+
+    var remove_embedded_works = function (embeddedWorksArray, start, end) {
+
+        return embeddedWorksArray.filter(function (obj) {
+            return obj.start != start && obj.end != end;
+        });
+    };
+    var remove_embedded_education = function (embeddedEducationArray, cursus_date_start, cursus_date_end) {
+
+        return embeddedEducationArray.filter(function (obj) {
+            return obj.cursus_date_start != cursus_date_start && obj.cursus_date_end != cursus_date_end;
+        });
+    };
+
+
     /*    $scope.updateCursusTitle = function (data) {
      var mData = Restangular.copy($scope.users)
      purge(mData);
@@ -189,7 +243,7 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
         purge(mData);
         try {
             $scope.users.patch(mData);
-            $scope.users = refresh();
+            //$scope.users = refresh();
             $scope.update_success = true;
             successmodal();
             $timeout(function () {
@@ -202,6 +256,19 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
         }
 
     };
+
+        $scope.updateSkillsIMG = function(id, data){
+             var arr = Restangular.one('skills', id);
+             var a = arr.get();
+            a.then(function(aa){
+                console.log(aa);
+            })
+
+
+
+        }
+
+
 }]);
 app.directive('modal', function () {
     return {
@@ -246,13 +313,13 @@ app.directive('modal', function () {
 });
 // sorting 1 ( ? -1 : 1)
 // sorting -1 (? 1 : -1)
-function sortWorksArray(a,b){
+function sortWorksArray(a, b) {
     var dateA = new Date(a.start).getTime();
     var dateB = new Date(b.start).getTime();
     return dateA > dateB ? -1 : 1;
 
 };
-function sortEducationArray(a,b){
+function sortEducationArray(a, b) {
     var dateA = new Date(a.cursus_date_start).getTime();
     var dateB = new Date(b.cursus_date_start).getTime();
     return dateA > dateB ? -1 : 1;

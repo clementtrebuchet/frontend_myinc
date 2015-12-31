@@ -118,16 +118,22 @@
         </modal>
         <h5>EDUCATION</h5>
 
-        <button class="btn btn-default btn-lg" ng-click="toggleModal()" ng-show="isAuthenticated"><span
-                class="glyphicon glyphicon-plus-sign"></span></button>
-        <br/>
+        <p>
+            <button class="btn btn-default btn-lg" ng-click="toggleModal()" ng-show="isAuthenticated"><span
+                    class="glyphicon glyphicon-plus-sign"></span></button>
+            <br/>
+        </p>
+
 
         <div class="row" ng-repeat="education in users.education">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="panel-info">
                         <div class="col-lg-2 col-lg-offset-1">
-
+                            <button class="btn btn-default btn-lg"
+                                    ng-click="removeEducation(education.cursus_date_start, education.cursus_date_end)"
+                                    ng-show="isAuthenticated"><span
+                                    class="glyphicon glyphicon-minus-sign"></span></button>
                         </div>
                         <div ng-hide="users.$resolved"><i class="icon-file">Loading…</i></div>
                         <div>
@@ -217,7 +223,7 @@
         <!--/.row -->
         <br>
         <hr>
-    </div>
+
     <!--/.container -->
 
     <!--Modal work form -->
@@ -263,187 +269,163 @@
     <!--WORK DESCRIPTION -->
     <div class="container desc">
         <h5>WORK</h5>
-        <button class="btn btn-default btn-lg" ng-click="toggleModale()" ng-show="isAuthenticated"><span
-                class="glyphicon glyphicon-plus-sign"></span></button>
-        <br/>
+
+        <p>
+            <button class="btn btn-default btn-lg" ng-click="toggleModale()" ng-show="isAuthenticated"><span
+                    class="glyphicon glyphicon-plus-sign"></span></button>
+            <br/></p>
 
         <div class="row" ng-repeat="work in users.works">
             <div class="panel panel-default">
                 <div class="panel-body">
                     <div class="panel-info">
                         <div class="col-lg-2 col-lg-offset-1">
-
+                            <button class="btn btn-default btn-lg"
+                                    ng-click="removeWorks(work.start, work.end)"
+                                    ng-show="isAuthenticated"><span
+                                    class="glyphicon glyphicon-minus-sign"></span></button>
                         </div>
-                        <div class="col-lg-6">
-                            <p ng-if='!isAuthenticated'>
-                                <t>{{ work.title }}</t>
-                                <br/>
-                                {{ work.company_name }} <br/>
-                            </p>
-                            <p ng-if='isAuthenticated'>
-                                <t editable-text="work.title" onaftersave="updateAny()">{{ work.title }}</t>
-                                <br/>
-                                <a href="#" editable-text="work.company_name"
+                    </div>
+                    <div class="col-lg-6">
+                        <p ng-if='!isAuthenticated'>
+                            <t>{{ work.title }}</t>
+                            <br/>
+                            {{ work.company_name }} <br/>
+                        </p>
+                        <p ng-if='isAuthenticated'>
+                            <t editable-text="work.title" onaftersave="updateAny()">{{ work.title }}</t>
+                            <br/>
+                            <a href="#" editable-text="work.company_name"
                                onaftersave="updateAny()">{{ work.company_name }}</a> <br/>
-                            </p>
-                            <p ng-if='!isAuthenticated'>
-                                <more ng-bind-html="work.description">{{ work.description }}</more>
-                            </p>
-                            <a href="#" ng-if='isAuthenticated' editable-textarea="work.description"
-                               e-style="color: green"
-                               e-rows="10" e-cols="60" onaftersave="updateAny()">
-                                <pre>{{ work.description }}</pre>
-                            </a>
-                        </div>
-                        <div class="col-lg-3">
-                            <p>
-                                <sm ng-if='!isAuthenticated'>{{ work.start | date:"MM/yyyy" }} - {{ work.end |
-                                    date:"MM/yyyy" }}
-                                </sm>
-                                <sm ng-if="isAuthenticated" editable-bsdate="work.start"
-                                    e-is-open="data.isOpen"
-                                    e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yyyy hh:mm:ss"
-                                    e-init-date="false"
-                                    onaftersave="updateAny()">{{ work.start | date:"MM/yyyy" }}
-                                </sm>
-                                <sm ng-if="isAuthenticated" editable-bsdate="work.end"
-                                    e-is-open="data.isOpen"
-                                    e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yyyy hh:mm:ss"
-                                    e-init-date="false"
-                                    onaftersave="updateAny()">{{ work.end | date:"MM/yyyy" }}
-                                </sm>
-                            </p>
-                            <p>
-                                <sm ng-if='!isAuthenticated' ng-hide="work.actual === false || work.actual === 'false'" class="alert alert-info">
-                                    <input type="radio" checked="{{ work.actual }}" disabled/>
-                                    This is my actual work
-                                </sm>
-                                <sm ng-if='isAuthenticated' name="act" editable-radiolist="work.actual" class="alert alert-info"  e-ng-options="s.value as s.text for s in statuses" onaftersave="updateAny()">
-                                    <input type="radio" checked="{{ work.actual }}"/>
-                                    This is my actual work
-                                </sm>
-                            </p>
-                        </div>
+                        </p>
+                        <p ng-if='!isAuthenticated'>
+                            <more ng-bind-html="work.description">{{ work.description }}</more>
+                        </p>
+                        <a href="#" ng-if='isAuthenticated' editable-textarea="work.description"
+                           e-style="color: green"
+                           e-rows="10" e-cols="60" onaftersave="updateAny()">
+                            <pre>{{ work.description }}</pre>
+                        </a>
+                    </div>
+                    <div class="col-lg-3">
+                        <p>
+                            <sm ng-if='!isAuthenticated'>{{ work.start | date:"MM/yyyy" }} - {{ work.end |
+                                date:"MM/yyyy" }}
+                            </sm>
+                            <sm ng-if="isAuthenticated" editable-bsdate="work.start"
+                                e-is-open="data.isOpen"
+                                e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yyyy hh:mm:ss"
+                                e-init-date="false"
+                                onaftersave="updateAny()">{{ work.start | date:"MM/yyyy" }}
+                            </sm>
+                            <sm ng-if="isAuthenticated" editable-bsdate="work.end"
+                                e-is-open="data.isOpen"
+                                e-ng-click="data.isOpen = true" e-datepicker-popup="dd/MM/yyyy hh:mm:ss"
+                                e-init-date="false"
+                                onaftersave="updateAny()">{{ work.end | date:"MM/yyyy" }}
+                            </sm>
+                        </p>
+                        <p>
+                            <sm ng-if='!isAuthenticated' ng-hide="work.actual === false || work.actual === 'false'"
+                                class="alert alert-info">
+                                <input type="radio" checked="{{ work.actual }}" disabled/>
+                                This is my actual work
+                            </sm>
+                            <sm ng-if='isAuthenticated' name="act" editable-radiolist="work.actual"
+                                class="alert alert-info" e-ng-options="s.value as s.text for s in statuses"
+                                onaftersave="updateAny()">
+                                <input type="radio" checked="{{ work.actual }}"/>
+                                This is my actual work
+                            </sm>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
-        <!--/.row -->
-        <br/>
-        <hr>
     </div>
-    <!--/.container -->
+    <!--/.row -->
+    <br/>
+    <hr>
+</div>
+<!--/.container -->
 
 
-    <!--AWARDS DESCRIPTION -->
-    <div class="container desc">
-        <div class="row">
-            <div class="col-lg-2 col-lg-offset-1">
-                <h5>AWARDS</h5>
-            </div>
-            <div class="col-lg-6">
-                <p>
-                    <t>Best Web Design</t>
-                    <br/>
-                    Black Tie Site <br/>
-                </p>
-            </div>
-            <div class="col-lg-3">
-                <p>
-                    <sm>NOVEMBER 2013</sm>
-                </p>
-            </div>
-
-            <div class="col-lg-6 col-lg-offset-3">
-                <p>
-                    <t>Designer of the Year</t>
-                    <br/>
-                    Awwwards Site
-                </p>
-                <p>
-                    <more>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                        has
-                        been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                        took a
-                        galley of type and scrambled it to make a type specimen book.
-                    </more>
-                </p>
-            </div>
-            <div class="col-lg-3">
-                <p>
-                    <sm>2013</sm>
-                </p>
-            </div>
+<!--Projects DESCRIPTION -->
+<div class="container desc">
+    <h5>Projetc</h5>
+    <div class="row">
+        <div class="col-lg-2 col-lg-offset-1">
 
         </div>
-        <!--/.row -->
-        <br>
+        <div class="col-lg-6">
+            <p>
+                <t>Best Web Design</t>
+                <br/>
+                Black Tie Site <br/>
+            </p>
+        </div>
+        <div class="col-lg-3">
+            <p>
+                <sm>NOVEMBER 2013</sm>
+            </p>
+        </div>
+
+        <div class="col-lg-6 col-lg-offset-3">
+            <p>
+                <t>Designer of the Year</t>
+                <br/>
+                Awwwards Site
+            </p>
+            <p>
+                <more>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                    has
+                    been the industry's standard dummy text ever since the 1500s, when an unknown printer
+                    took a
+                    galley of type and scrambled it to make a type specimen book.
+                </more>
+            </p>
+        </div>
+        <div class="col-lg-3">
+            <p>
+                <sm>2013</sm>
+            </p>
+        </div>
+
     </div>
-    <!--/.container -->
+    <!--/.row -->
+    <br>
+</div>
+<!--/.container -->
 
 
-    <section id="work" name="work"></section>
-    <!--PORTFOLIO DESCRIPTION -->
-    <div class="container desc">
-        <div class="row">
-            <div class="col-lg-2 col-lg-offset-1">
-                <h5>PORTFOLIO</h5>
-            </div>
-            <div class="col-lg-6">
-                <p><img class="img-responsive" src="assets/img/port01.jpg" alt=""></p>
-            </div>
-            <div class="col-lg-3">
-                <p>CANALS OF ENGLAND</p>
-
-                <p>
-                    <more>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                        has
-                        been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                        took a
-                        galley of type and scrambled it to make a type specimen book.<br/><br/>
-                        <sm><i class="icon-tag"></i> design</sm>
-                    </more>
-                </p>
-            </div>
-
-            <div class="col-lg-6 col-lg-offset-3">
-                <p><img class="img-responsive" src="assets/img/port02.jpg" alt=""></p>
-            </div>
-            <div class="col-lg-3">
-                <p>SANKEY</p>
-
-                <p>
-                    <more>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                        has
-                        been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                        took a
-                        galley of type and scrambled it to make a type specimen book.<br/><br/>
-                        <sm><i class="icon-tag"></i> front-End</sm>
-                    </more>
-                </p>
-            </div>
-
-            <div class="col-lg-6 col-lg-offset-3">
-                <p><img class="img-responsive" src="assets/img/port03.jpg" alt=""></p>
-            </div>
-            <div class="col-lg-3">
-                <p>WE GROW</p>
-
-                <p>
-                    <more>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                        has
-                        been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                        took a
-                        galley of type and scrambled it to make a type specimen book.<br/><br/>
-                        <sm><i class="icon-tag"></i> web design</sm>
-                    </more>
-                </p>
-            </div>
+<section id="work" name="work"></section>
+<!--Skills DESCRIPTION -->
+<div class="container desc">
+    <h5>SKILLS</h5>
+    <div class="row" ng-repeat="skill in skills">
+        <div class="col-lg-2 col-lg-offset-1">
 
         </div>
-        <!--/.row -->
-        <br>
-        <br>
+        <div class="col-lg-6">
+            <p><img class="img-responsive" ng-if='!isAuthenticated'  src="{{ skill.skill_image }}" alt=""></p>
+             <p><img class="img-responsive" ng-if='isAuthenticated' editable-url="skill.skill_image" src="{{ skill.skill_image }}" alt="" onaftersave="updateSkillsIMG(skill._id, $data)"></p>
+        </div>
+        <div class="col-lg-3">
+            <p ng-if='!isAuthenticated'>{{ skill.skill_title}}</p>
+            <p ng-if='isAuthenticated' editable-text="skill.skill_title" onaftersave="updateSkills(skill._id)">{{ skill.skill_title }}</p>
+            <p>
+                <more ng-if='!isAuthenticated'>{{ skill.skill_level }}<br/><br/>
+                    <sm><i class="icon-tag"></i> system</sm>
+                </more>
+                 <more ng-if='isAuthenticated'  editable-text=" skill.skill_level" onaftersave="updateSkills(skill._id)">{{ skill.skill_level }}<br/><br/>
+                    <sm><i class="icon-tag"></i> system</sm>
+                </more>
+            </p>
+        </div>
     </div>
-    <!--/.container -->
+    <!--/.row -->
+    <br>
+    <br>
+</div>
+<!--/.container -->
 </div>
