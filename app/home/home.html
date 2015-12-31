@@ -402,22 +402,22 @@
 <!--Skills DESCRIPTION -->
 <div class="container desc">
     <h5>SKILLS</h5>
-    <div class="row" ng-repeat="skill in skills">
+    <div class="row" ng-repeat="skill in users.skills">
         <div class="col-lg-2 col-lg-offset-1">
 
         </div>
         <div class="col-lg-6">
             <p><img class="img-responsive" ng-if='!isAuthenticated'  src="{{ skill.skill_image }}" alt=""></p>
-             <p><img class="img-responsive" ng-if='isAuthenticated' editable-url="skill.skill_image" src="{{ skill.skill_image }}" alt="" onaftersave="updateSkillsIMG(skill._id, $data)"></p>
+             <p><img class="img-responsive" ng-if='isAuthenticated' editable-url="skill.skill_image" src="{{ skill.skill_image }}" alt="" onaftersave="updateAny()"></p>
         </div>
         <div class="col-lg-3">
             <p ng-if='!isAuthenticated'>{{ skill.skill_title}}</p>
-            <p ng-if='isAuthenticated' editable-text="skill.skill_title" onaftersave="updateSkills(skill._id)">{{ skill.skill_title }}</p>
+            <p ng-if='isAuthenticated' editable-text="skill.skill_title" onaftersave="updateAny()" >{{ skill.skill_title }}</p>
             <p>
                 <more ng-if='!isAuthenticated'>{{ skill.skill_level }}<br/><br/>
                     <sm><i class="icon-tag"></i> system</sm>
                 </more>
-                 <more ng-if='isAuthenticated'  editable-text=" skill.skill_level" onaftersave="updateSkills(skill._id)">{{ skill.skill_level }}<br/><br/>
+                 <more ng-if='isAuthenticated'  editable-text=" skill.skill_level" onaftersave="updateAny()">{{ skill.skill_level }}<br/><br/>
                     <sm><i class="icon-tag"></i> system</sm>
                 </more>
             </p>

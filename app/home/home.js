@@ -46,7 +46,7 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
     };
     var item = {};
     $scope.users = {};
-    $scope.skills= {};
+
 
     $scope.statuses = [
         {value: Boolean(true), text: 'oui'},
@@ -94,7 +94,6 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
     };
     $scope.form = {};
     $scope.users = refresh();
-    $scope.skills = refresh_skills()
     $scope.addEducation = function (myForm) {
         var myEdu = myForm;
         console.log(myEdu);
@@ -163,6 +162,20 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
         delete mData.$resolved;
         delete mData.$update_success;
         delete mData.success_modal;
+    };
+
+        var purgeSkills = function (mData) {
+            var lgt = mData.length;
+            for (var i = 0; i < lgt; i++){
+                delete mData[i]._latest_version;
+                delete mData[i]._id;
+                delete mData[i]._updated;
+                delete mData[i]._version;
+                delete mData[i]._deleted;
+                delete mData[i]._links;
+                delete mData[i]._created;
+                delete mData[i]._etag;
+            }
     };
     var edu = {
         "cursus_date_end": new Date("2009-07-10T00:00:00Z"),
@@ -241,6 +254,7 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
     $scope.updateAny = function () {
         var mData = Restangular.copy($scope.users);
         purge(mData);
+        //purgeSkills(mData.skills)
         try {
             $scope.users.patch(mData);
             //$scope.users = refresh();
@@ -257,16 +271,16 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
 
     };
 
-        $scope.updateSkillsIMG = function(id, data){
-             var arr = Restangular.one('skills', id);
-             var a = arr.get();
-            a.then(function(aa){
-                console.log(aa);
-            })
-
-
-
-        }
+        //$scope.updateSkillsIMG = function(id, data){
+        //     var arr = Restangular.one('skills', id);
+        //     var a = arr.get();
+        //    a.then(function(aa){
+        //        console.log(aa);
+        //    })
+        //
+        //
+        //
+        //}
 
 
 }]);
