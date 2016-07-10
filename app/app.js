@@ -2,6 +2,8 @@
 
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp', [
+    'angular-carousel-3d',
+    'gettext',
     'ngCookies',
     'ngRoute',
     'angular-jwt',
@@ -17,8 +19,9 @@ var app = angular.module('myApp', [
     'myApp.login',
     'myApp.version'
 
+
 ]);
-var client_id = 'SBAuSotGA6lBS3Yckqny3oyg8zfiEXyns3cHy10A'
+var client_id = 'YM5Qe9Ho6YfecEKQaMXZtbw9edPS6KhT0iKZ6FUf';
 
 function url_base64_decode(str) {
     var output = str.replace('-', '+').replace('_', '/');
@@ -131,7 +134,7 @@ function _redirectIfNotAuthenticated($rootScope, $window, $location) {
 
 app.config(function ($routeProvider, $httpProvider, RestangularProvider) {
 
-    RestangularProvider.setBaseUrl('http://192.168.0.2:5000/');
+    RestangularProvider.setBaseUrl('https://curriculum.trebuchetclement.fr:5055/');
     RestangularProvider.setRestangularFields({
         id: "_id",
         etag: '_etag',
@@ -154,18 +157,17 @@ app.config(function ($routeProvider, $httpProvider, RestangularProvider) {
     $httpProvider.interceptors.push('authInterceptor');
 
     $routeProvider.when('/home', {
-        templateUrl: 'home/home.html',
-        controller: 'HomeCtrl'
+        templateUrl: 'home/home.html'
+        
     });
 
     $routeProvider.when('/login', {
-        templateUrl: 'login/login.html',
-        controller: 'UserCtrl'
+        templateUrl: 'login/login.html'
+        
     });
 
     $routeProvider.when('/admin', {
         templateUrl: 'admin/admin.html',
-        controller: 'AdminCtrl',
         resolve: {
             redirectIfNotAuthenticated: _redirectIfNotAuthenticated
         }
@@ -173,7 +175,7 @@ app.config(function ($routeProvider, $httpProvider, RestangularProvider) {
 
     $routeProvider.when('/', {
         templateUrl: 'welcome/welcome.html',
-        controller: 'WelcomeCtrl'
+        
     });
 
 

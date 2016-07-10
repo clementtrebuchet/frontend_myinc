@@ -6,15 +6,19 @@
   "license": "MIT",
   "private": true,
   "dependencies": {
-    "angular": "~1.4.8",
+    "angular": "~1.5.7",
     "angular-route": "~1.4.8",
     "angular-loader": "~1.4.8",
     "angular-mocks": "~1.4.8",
     "html5-boilerplate": "~5.2.0",
     "bootstrap": "~3.3.6",
-    "angular-resource": "~1.4.2"
+    "angular-resource": "~1.4.2",
+    "angular-gettext": "~2.3.4"
   },
   "resolutions": {
-    "angular": "~1.4.8"
+    "angular": "~1.x"
+  },
+  "devDependencies": {
+    "angular-translate": "~2.11.0"
   }
 }

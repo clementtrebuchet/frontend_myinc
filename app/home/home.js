@@ -104,7 +104,7 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
         };
 
         $scope.addWork = function (myForm) {
-            if (typeof($scope.users.works) === "undefined") {
+            if (typeof($scope.users) === "undefined") {
                 $scope.users.works = [];
             }
 
@@ -137,6 +137,7 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
             mSkill.skill_title = $scope.skill_title;
             mSkill.skill_level = $scope.skill_level;
             mSkill.skill_image = $scope.skill_image;
+            mySkill.skill_tag = $scope.skill_tag;
             $scope.users.skills.push(mSkill);
             var mData = Restangular.copy($scope.users);
             purge(mData);
@@ -194,7 +195,8 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
         var mSkill = {
             'skill_title': "",
             'skill_level': "",
-            'skill_image': ""
+            'skill_image': "",
+            'skill_tag': ""
         };
 
         $scope.removeEducation = function (start, end) {
@@ -256,7 +258,8 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
 
 
             } catch (e) {
-                console.log('update error.... : ' + e);
+
+                alert('update error.... : ' + e);
             }
 
         };

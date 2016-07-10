@@ -153,8 +153,7 @@ hr {
 /* Header Wrap */
 #headerwrap {
 
-    background: url(http://invisionconnect.fr/uploads/monthly_2015_09/homepage-banner-header-background.jpg.93dc313752d297ba57359c507ae01c0e.jpg.dea92e086d84d937f0791e5330345550.jpg) no-repeat center top;
-    /*background: url(http://adeiso.com/images/concours-innovation-numrique-banner.png) no-repeat center top;*/
+    background: url(../img/support-banner-extended-memory-02-972x180.png) no-repeat center top;
     margin-top: 60px;
     padding-top: 140px;
     text-align: center;
@@ -212,12 +211,12 @@ hr {
 }
 
 #skillswrap h5, p {
-    color: white;
+    color: #fffef0;
 }
 
 #footwrap {
     background: #2f2f2f;
-    padding-top: 50px;
+    padding-top: 20px;
     padding-bottom: 50px;
 }
 

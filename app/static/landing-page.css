@@ -26,6 +26,7 @@ h6 {
 }
 
 .lead {
+    color: #000;
     font-size: 18px;
     font-weight: 400;
 }
@@ -34,15 +35,18 @@ h6 {
     padding-top: 50px; /* If you're making other pages, make sure there is 50px of padding to make sure the navbar doesn't overlap content! */
     padding-bottom: 50px;
     text-align: center;
-    color: #f8f8f8;
-    background: url(../img/intro-bg.jpg) no-repeat center center;
+    background: url('../img/DevOps-Cloud1.jpg') center center no-repeat;
+    color: #988f75;
     background-size: cover;
+    filter: alpha(opacity=10);
+
 }
 
 .intro-message {
     position: relative;
-    padding-top: 20%;
-    padding-bottom: 20%;
+    padding-top: 10%;
+    padding-bottom: 10%;
+    max-height: 450px;
 }
 
 .intro-message > h1 {

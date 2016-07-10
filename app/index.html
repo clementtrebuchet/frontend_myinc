@@ -16,17 +16,17 @@
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
+      <link rel="stylesheet" href="bower_components/angular-carousel-3d/dist/carousel-3d.css">
+
+
 
     <link rel="stylesheet" href="static/main.css">
     <link rel="stylesheet" href="static/font-awesome.min.css">
 
     <!--<link rel="stylesheet" href="app.css">-->
-    <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic' rel='stylesheet'
-          type='text/css'>
-    <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,700' rel='stylesheet' type='text/css'>
-    <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+    <link href='static/fontgoogle.css' rel='stylesheet' type='text/css'>
+   <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
     <link href="bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
-
 
 
 </head>
@@ -39,16 +39,17 @@
                     <ul id="nav" class="nav">
                         <li class="menu-item"><a class="smoothScroll" ng-click="go('/')" title="Home"><i
                                 class="icon-home"></i></a></li>
-                       <!-- <li class="menu-item"><a class="smoothScroll" href="#resume" title="Resume"><i
-                                class="icon-file"></i></a></li>
-                        <li class="menu-item"><a class="smoothScroll" href="#work" title="Works"><i
-                                class="icon-briefcase"></i></a></li>
-                        <li class="menu-item"><a class="smoothScroll" href="#contact" title="Contact"><i
-                                class="icon-envelope"></i></a></li>-->
+                        <!-- <li class="menu-item"><a class="smoothScroll" href="#resume" title="Resume"><i
+                                 class="icon-file"></i></a></li>
+                         <li class="menu-item"><a class="smoothScroll" href="#work" title="Works"><i
+                                 class="icon-briefcase"></i></a></li>
+                         <li class="menu-item"><a class="smoothScroll" href="#contact" title="Contact"><i
+                                 class="icon-envelope"></i></a></li>-->
                         <li class="menu-item"><a href="" ng-click="go('/home')"><i class="icon-info"></i></a></li>
-                         <li class="menu-item"><a ng-click="go('/admin')" href=""><i class="icon-lock"></i></a></li>
+                        <li class="menu-item"><a ng-click="go('/admin')" href=""><i class="icon-lock"></i></a></li>
                         <!--<li  class="menu-item"><a href="" ng-click="go('/login')"><i class="icon-signin"></i></a></li>-->
-                        <li ng-if='isAuthenticated' class="menu-item"><a ng-click="logout()" href=""><i class="icon-signout"></i></a></li>
+                        <li ng-if='isAuthenticated' class="menu-item"><a ng-click="logout()" href=""><i
+                                class="icon-signout"></i></a></li>
                         <!--<li ng-show="isAuthenticated" class="menu-item"><a href="">{{ user.username }}</a></li>-->
                     </ul>
                     <!--/ uL#nav -->
@@ -72,16 +73,16 @@
 
 </div>
 
-<br />
+<br/>
 <!--FOOTER DESCRIPTION -->
 <div id="footwrap">
     <div class="container">
         <div class="row">
 
-            <div class="col-lg-2 col-lg-offset-1">
+            <div class="col-lg-2">
                 <h5>CONTACT</h5>
             </div>
-            <div class="col-lg-6">
+            <div class="col-lg-5">
                 <p>
                     <t>Email</t>
                     <br/>
@@ -91,7 +92,7 @@
                     <t>Adress</t>
                     <br/>
                     7 impasse clément ader <br/>
-                    31470  <br/>
+                    31470 <br/>
                     Fonsorbes, France. <br/>
                 </p>
                 <p>
@@ -101,21 +102,21 @@
                 </p>
                 <p>
                     <t>Legal Informations</t>
-                    <br />
-                     <a target="_blank" href="https://www.infogreffe.fr/societes/entreprise-societe/509767349-trebuchet-clement-damien-francis-50976734900020.html?typeProduitOnglet=EXTRAIT&afficherretour=false">SIRET : 509 767 349 00020</a>
-                    <br />
+                    <br/>
+                    <a target="_blank"
+                       href="https://www.infogreffe.fr/societes/entreprise-societe/509767349-trebuchet-clement-damien-francis-50976734900020.html?typeProduitOnglet=EXTRAIT&afficherretour=false">SIRET
+                        : 509 767 349 00020</a>
+                    <br/>
                 </p>
             </div>
             <div class="col-lg-3">
+
+                    <h5>SOCIAL LINKS</h5>
+
                 <p>
-                    <sm>SOCIAL LINKS</sm>
-                </p>
-                <p>
-                    <a href="#"><i class="icon-dribbble"></i></a>
                     <a href="#"><i class="icon-twitter"></i></a>
                     <a href="#"><i class="icon-facebook"></i></a>
                     <a href="#"><i class="icon-linkedin"></i></a>
-                    <a href="#"><i class="icon-apple"></i></a>
 
                 </p>
             </div>
@@ -137,14 +138,17 @@
 -->
 <script src="bower_components/jquery/dist/jquery.min.js"></script>
 <script src="bower_components/angular/angular.js"></script>
+
+<script src="bower_components/angular-carousel-3d/dist/carousel-3d.js"></script>
+<script src="bower_components/angular-swipe/dist/angular-swipe.js"></script>
 <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script src="bower_components/angular-resource/angular-resource.js"></script>
 <script src="bower_components/restangular/src/restangular.js"></script>
 <script src="bower_components/lodash/lodash.js"></script>
 <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-<script src="bower_components/angular-cookie/angular-cookie.js"></script>
 <script src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
+<script src="bower_components/angular-gettext/dist/angular-gettext.min.js"></script>
 <script src="app.js"></script>
 <script src="login/login.js"></script>
 <script src="admin/admin.js"></script>
@@ -157,6 +161,7 @@
 <script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
 <script src="bower_components/angular-animate/angular-animate.min.js"></script>
 <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+
 
 </body>
 </html>

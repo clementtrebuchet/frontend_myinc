@@ -1,46 +1,75 @@
 <head>
-  <link rel="stylesheet" href="static/bootstrap.css">
-  <link rel="stylesheet" href="static/landing-page.css">
+    <link rel="stylesheet" href="static/bootstrap.css">
+    <link rel="stylesheet" href="static/landing-page.css">
+    <style>
+        .clearfix:after {
+            visibility: hidden;
+            display: block;
+            font-size: 0;
+            content: " ";
+            clear: both;
+            height: 0;
+        }
+
+        .clearfix {
+            display: inline-block;
+        }
+
+        /* start commented backslash hack \*/
+        * html .clearfix {
+            height: 1%;
+        }
+
+        .clearfix {
+            display: block;
+        }
+
+        /* close commented backslash hack */
+    </style>
 </head>
 <!-- Header -->
-    <a name="about"></a>
-    <div class="intro-header">
-        <div class="container">
+<a name="about"></a>
+<div class="intro-header">
+    <div class="container">
 
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="intro-message">
-                        <h1>Trébuchet Clément</h1>
-                        <h3>Freelancer </h3>
-                        <h4>DevOps Linux Engineer</h4>
-                        <br />
-                        <ul class="list-inline intro-social-buttons">
-                            <li>
-                                <a target="_blank" href="https://twitter.com/teamatcs" class="btn btn-default btn-lg"><i class="icon-twitter"></i> <span class="network-name">Twitter</span></a>
-                            </li>
-                            <li>
-                                <a target="_blank" href="https://github.com/clementtrebuchet?tab=repositories" class="btn btn-default btn-lg"><i class="icon-github"></i> <span class="network-name">Github</span></a>
-                            </li>
-                            <li>
-                                <a target="_blank" href="https://www.linkedin.com/in/clement-trebuchet-74975085" class="btn btn-default btn-lg"><i class="icon-linkedin"></i> <span class="network-name">Linkedin</span></a>
-                            </li>
-                             <li>
-                                <a  href="#/home" class="btn btn-default btn-lg"><i class="icon-info"></i> <span class="network-name">About me</span></a>
-                            </li>
-                        </ul>
-                    </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="intro-message">
+                    <h1>Trébuchet Clément</h1>
+                    <h3>Dev / Ops Engineer</h3>
+                    <h4>Freelancer </h4>
+                    <br/>
+                    <ul class="list-inline intro-social-buttons">
+                        <li>
+                            <a target="_blank" href="https://twitter.com/teamatcs" class="btn btn-default btn-lg"><i
+                                    class="icon-twitter"></i> <span class="network-name">Twitter</span></a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://github.com/clementtrebuchet?tab=repositories"
+                               class="btn btn-default btn-lg"><i class="icon-github"></i> <span class="network-name">Github</span></a>
+                        </li>
+                        <li>
+                            <a target="_blank" href="https://www.linkedin.com/in/clement-trebuchet-74975085"
+                               class="btn btn-default btn-lg"><i class="icon-linkedin"></i> <span class="network-name">Linkedin</span></a>
+                        </li>
+                        <li>
+                            <a href="#/home" class="btn btn-default btn-lg"><i class="icon-info"></i> <span
+                                    class="network-name" translate>About me</span></a>
+                        </li>
+                    </ul>
                 </div>
             </div>
-
         </div>
-        <!-- /.container -->
 
     </div>
-    <!-- /.intro-header -->
+    <!-- /.container -->
 
-    <!-- Page Content -->
+</div>
+<!-- /.intro-header -->
 
-	<a  name="services"></a>
+<!-- Page Content -->
+<div ng-controller="WelcomeCtrl as app">
+    <a name="services"></a>
     <div class="content-section-a">
 
         <div class="container">
@@ -48,11 +77,18 @@
                 <div class="col-lg-5 col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">Linux knowledge:<br></h2>
-                    <p class="lead">A special thanks to <a target="_blank" href="http://join.deathtothestockphoto.com/">Death to the Stock Photo</a> for providing the photographs that you see in this template. Visit their website to become a member.</p>
+                    <h2 class="section-heading">Skills<br></h2>
+                    <p translate class="lead">Software and web
+                        application development including Python, Java and Javascript languages</p>
+                    <p translate class="lead">Continious
+                        integration, test, delivery architecture deployement and administration</p>
+                    <p translate class="lead">Open Source
+                        infrastructure architecture, deployement and monitoring</p>
+                    <p translate class="lead">Team Lead and project management</p>
+
                 </div>
                 <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="http://www.technologyblueprint.co.uk/documents/19691/26806/linux.jpg/eb5a123e-ec3c-4486-9a30-d0b65ebb014e?t=1349363248000?t=1349363248477" alt="">
+                    <img class="img-responsive" src="img/atelier-devops.jpg" alt="">
                 </div>
             </div>
 
@@ -70,11 +106,18 @@
                 <div class="col-lg-5 col-lg-offset-1 col-sm-push-6  col-sm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">3D Device Mockups<br>by PSDCovers</h2>
-                    <p class="lead">Turn your 2D designs into high quality, 3D product shots in seconds using free Photoshop actions by <a target="_blank" href="http://www.psdcovers.com/">PSDCovers</a>! Visit their website to download some of their awesome, free photoshop actions!</p>
+                    <h2 class="section-heading">Working with a dev ops approach</h2>
+                    <p class="lead">Code – Code Development and Review, continuous integration tools</p>
+                    <p class="lead">Build – Version control tools, code merging, Build status</p>
+                    <p class="lead">Test – Test and results determine performance</p>
+                    <p class="lead">Package – Artifact repository, Application pre-deployment staging</p>
+                    <p class="lead">Release – Change management, Release approvals, release automation</p>
+                    <p class="lead">Configure – Infrastructure configuration and management, Infrastructure as Code tools</p>
+                    <p class="lead">Monitor – Applications performance monitoring, End user experience</p>
                 </div>
                 <div class="col-lg-5 col-sm-pull-6  col-sm-6">
-                    <img class="img-responsive" src="img/dog.png" alt="">
+                    <img class="img-responsive" src="img/DevOps_schema.jpg" alt="">
+                    <img class="img-responsive"  src="img/DevOps-Cloud.jpg" alt="">
                 </div>
             </div>
 
@@ -89,15 +132,25 @@
         <div class="container">
 
             <div class="row">
-                <div class="col-lg-5 col-sm-6">
+                <div class="col-lg-6 col-xm-6">
                     <hr class="section-heading-spacer">
                     <div class="clearfix"></div>
-                    <h2 class="section-heading">Google Web Fonts and<br>Font Awesome Icons</h2>
-                    <p class="lead">This template features the 'Lato' font, part of the <a target="_blank" href="http://www.google.com/fonts">Google Web Font library</a>, as well as <a target="_blank" href="http://fontawesome.io">icons from Font Awesome</a>.</p>
+                    <h2 class="section-heading">Technologies<br></h2>
+                    <p class="lead">Always choose the best open sources technologies, for your present and future needs.</p>
                 </div>
-                <div class="col-lg-5 col-lg-offset-2 col-sm-6">
-                    <img class="img-responsive" src="img/phones.png" alt="">
-                </div>
+                <carousel3d
+                        ng-model="app.slides"
+                        options="app.options">
+
+                    <carousel3d-slide ng-repeat="slide in app.slides">
+                        <figure>
+                            <img ng-src="{{slide.src}}" alt=""/>
+                            <figcaption ng-bind="slide.caption"></figcaption>
+                        </figure>
+                    </carousel3d-slide>
+
+                </carousel3d>
+
             </div>
 
         </div>
@@ -106,25 +159,30 @@
     </div>
     <!-- /.content-section-a -->
 
-	<a  name="contact"></a>
+    <a name="contact"></a>
     <div class="banner">
 
         <div class="container">
 
             <div class="row">
                 <div class="col-lg-6">
-                    <h2>Connect to Start Bootstrap:</h2>
+                    <h2>Need a dev ops ? contact me: </h2>
                 </div>
                 <div class="col-lg-6">
                     <ul class="list-inline banner-social-buttons">
                         <li>
-                            <a target="_blank" href="https://twitter.com/teamatcs" class="btn btn-default btn-lg"><i class="icon-twitter"></i> <span class="network-name">Twitter</span></a>
+                            <a target="_blank" href="https://twitter.com/teamatcs" class="btn btn-default btn-lg"><i
+                                    class="icon-twitter"></i> <span class="network-name">Twitter</span></a>
                         </li>
                         <li>
-                            <a target="_blank" href="https://github.com/clementtrebuchet?tab=repositories" class="btn btn-default btn-lg"><i class="icon-github"></i> <span class="network-name">Github</span></a>
+                            <a target="_blank" href="https://github.com/clementtrebuchet?tab=repositories"
+                               class="btn btn-default btn-lg"><i class="icon-github"></i> <span
+                                    class="network-name">Github</span></a>
                         </li>
                         <li>
-                            <a target="_blank" href="https://www.linkedin.com/in/clement-trebuchet-74975085" class="btn btn-default btn-lg"><i class="icon-linkedin"></i> <span class="network-name">Linkedin</span></a>
+                            <a target="_blank" href="https://www.linkedin.com/in/clement-trebuchet-74975085"
+                               class="btn btn-default btn-lg"><i class="icon-linkedin"></i> <span
+                                    class="network-name">Linkedin</span></a>
                         </li>
                     </ul>
                 </div>
@@ -134,34 +192,4 @@
         <!-- /.container -->
 
     </div>
-    <!-- /.banner -->
-
-<!--
-    &lt;!&ndash; Footer &ndash;&gt;
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <ul class="list-inline">
-                        <li>
-                            <a href="#">Home</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#about">About</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#services">Services</a>
-                        </li>
-                        <li class="footer-menu-divider">&sdot;</li>
-                        <li>
-                            <a href="#contact">Contact</a>
-                        </li>
-                    </ul>
-                    <p class="copyright text-muted small">Copyright &copy; Clément Trébuchet . All Rights Reserved</p>
-                </div>
-            </div>
-        </div>
-    </footer>
--->
+</div>

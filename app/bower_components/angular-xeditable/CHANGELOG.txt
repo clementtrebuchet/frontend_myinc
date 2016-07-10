@@ -1,6 +1,45 @@
 Angular-xeditable changelog
 =============================
 
+Version 0.2.0 Jun 28, 2016
+
+----------------------------
+[enh #491] Added popover functionality (ckosloski)
+[fix #489] Fix - Memory leak when ending editing by destroying the scope (kenfdev)
+[enh #479] Added ability to add a label to an input (ckosloski)
+[enh #473] Added support for datetime-local input (ckosloski)
+[bug #464] Added ability to add more then one editable-ui-select component on the same page (julia-k)
+[enh #463] Added on-change support for bsdate and placeholder support for editable-select (ckosloski)
+[bug #456] Fixed bsdate warnings with latest ui-bootstrap (ckosloski)
+[bug #454] Fix finding form controller when elements not yet in DOM (bostrom)
+[bug #366] Make 'e-form' publish local $form even if specify object property (hshn)
+
+
+Version 0.1.12 Apr 14, 2016
+----------------------------
+[enh #448] Add support for ui-select (ckosloski)
+[enh #448] Current date as default max date on combodate (Jmenache)
+[enh #443] Updated to use Angular 1.5.0, bootstrap 3.3.6, ui-bootstrap 1.2.4 (ckosloski)
+[bug #435] Fix typeahed not working with ui-boostrap (ckosloski)
+[bug #428] Fix datepicker doesn't popup (ckosloski)
+[bug #415] Fix isDefaultPrevented check in editableForm prevents blur (mgerring)
+[bug #317] Fix implementation for datepicker (ckosloski)
+
+
+Version 0.1.11 Mar 24, 2016
+----------------------------
+[bug #424] Fix support for password fields (ckosloski)
+[enh #411] Add semantic-ui theme (ka7eh)
+[bug #238] Fix editable-select to work properly with objects
+
+Version 0.1.10 Feb 16, 2016
+----------------------------
+[enh #408] Allow passing min/maxYear to combodate (dolzenko)
+[bug #377] Fix radiolist issues when not using default angular symbol (Kevlys)
+[bug #353] Make new editables added to a form match the waiting state of the form (coreypobrien)
+[bug #314] Fix for unable to use single xeditable form elements without whole form editing (mitcht)
+[enh #294] Add minified versions of css to the dist (NameFILIP)
+
 Version 0.1.9 Mar 22, 2015
 ----------------------------
 [enh #258] Support for bootstrap-ui datepicker (Painyjames)

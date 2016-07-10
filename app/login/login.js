@@ -59,16 +59,16 @@ app.controller('UserCtrl', ['$rootScope', '$scope', '$http', '$window', '$locati
     $scope.go = function (target) {
         $location.path(target);
     };
-    $scope.user = {username: 'messagebot', password: 'messagebot'};
+    $scope.user = {username: 'admin', password: 'admin'};
 
     $scope.submit = function (user) {
         var grant = "&grant_type=password";
-        var client_id = "client_id=hnwWIfbrYuInJB0G5NrhT1ULXkwfsZ8J6fZHZOQB";
+        var client_id = "client_id=YM5Qe9Ho6YfecEKQaMXZtbw9edPS6KhT0iKZ6FUf";
         us = user.username;
         pass = user.password;
-        var data = client_id + grant + '&username=' + us + '&password=' + pass
+        var data = client_id + grant + '&username=' + us + '&password=' + pass;
         $http({
-            url: 'http://192.168.0.2:5000/oauth/token?' + data,
+            url: 'https://curriculum.trebuchetclement.fr:5055/oauth/token?' + data,
             method: 'POST',
             headers: {
                 'Content-Type': 'application/x-www-form-urlencoded' // Note the appropriate header

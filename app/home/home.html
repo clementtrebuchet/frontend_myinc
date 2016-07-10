@@ -7,7 +7,7 @@
     <link href="static/landing-page.css" rel="stylesheet">
     <!-- Custom Fonts -->
     <link href="static/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="http://fonts.googleapis.com/css?family=Lato:300,400,700,300italic,400italic,700italic" rel="stylesheet"
+    <link href="static/fontgoogle.css" rel="stylesheet"
           type="text/css">
 </head>
 
@@ -45,9 +45,9 @@
                     </a>
                 </div>
                 <div class="col-lg-2">
-                    <p><a href="#"><i class="icon-file"></i></a>
-                        <sm>DOWNLOAD PDF</sm>
-                    </p>
+                    <a href="https://curriculum.trebuchetclement.fr/img/CV_trebuchet_clement.pdf" target="_blank"><i
+                            class="icon-file"></i>
+                        DOWNLOAD PDF (French) </a>
                 </div>
 
             </div>
@@ -309,8 +309,10 @@
                         </div>
                         <div class="col-lg-3">
                             <p>
-                                <sm ng-if='!isAuthenticated'>{{ work.start | date:"MM/yyyy" }} - {{ work.end |
-                                    date:"MM/yyyy" }}
+                                <sm ng-if='!isAuthenticated'>{{ work.start | date:"MM/yyyy" }}
+                                    <ng-if ng-if="work.actual === false || work.actual === 'false'">- {{ work.end
+                                        |date:"MM/yyyy" }}
+                                    </ng-if>
                                 </sm>
                                 <sm ng-if="isAuthenticated" editable-bsdate="work.start"
                                     e-is-open="data.isOpen"
@@ -327,12 +329,12 @@
                             </p>
                             <p>
                                 <sm ng-if='!isAuthenticated' ng-hide="work.actual === false || work.actual === 'false'"
-                                    class="alert alert-info">
+                                    class="alert alert-success">
                                     <input type="radio" checked="{{ work.actual }}" disabled/>
-                                    This is my actual work
+                                    This is my actual work from:{{ work.start | date:"MM/yyyy" }}
                                 </sm>
                                 <sm ng-if='isAuthenticated' name="act" editable-radiolist="work.actual"
-                                    class="alert alert-info" e-ng-options="s.value as s.text for s in statuses"
+                                    class="alert alert-success" e-ng-options="s.value as s.text for s in statuses"
                                     onaftersave="updateAny()">
                                     <input type="radio" checked="{{ work.actual }}"/>
                                     This is my actual work
@@ -350,57 +352,57 @@
     <!--/.container -->
 
 
-<!--    &lt;!&ndash;Projects DESCRIPTION &ndash;&gt;
-    <div class="container desc">
-        <h5>Projetc</h5>
+    <!--    &lt;!&ndash;Projects DESCRIPTION &ndash;&gt;
+        <div class="container desc">
+            <h5>Projetc</h5>
 
-        <div class="row">
-            <div class="col-lg-2 col-lg-offset-1">
+            <div class="row">
+                <div class="col-lg-2 col-lg-offset-1">
+
+                </div>
+                <div class="col-lg-6">
+                    <p>
+                        <t>Best Web Design</t>
+                        <br/>
+                        Black Tie Site <br/>
+                    </p>
+                </div>
+                <div class="col-lg-3">
+                    <p>
+                        <sm>NOVEMBER 2013</sm>
+                    </p>
+                </div>
+
+                <div class="col-lg-6 col-lg-offset-3">
+                    <p>
+                        <t>Designer of the Year</t>
+                        <br/>
+                        Awwwards Site
+                    </p>
+                    <p>
+                        <more>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
+                            has
+                            been the industry's standard dummy text ever since the 1500s, when an unknown printer
+                            took a
+                            galley of type and scrambled it to make a type specimen book.
+                        </more>
+                    </p>
+                </div>
+                <div class="col-lg-3">
+                    <p>
+                        <sm>2013</sm>
+                    </p>
+                </div>
 
             </div>
-            <div class="col-lg-6">
-                <p>
-                    <t>Best Web Design</t>
-                    <br/>
-                    Black Tie Site <br/>
-                </p>
-            </div>
-            <div class="col-lg-3">
-                <p>
-                    <sm>NOVEMBER 2013</sm>
-                </p>
-            </div>
-
-            <div class="col-lg-6 col-lg-offset-3">
-                <p>
-                    <t>Designer of the Year</t>
-                    <br/>
-                    Awwwards Site
-                </p>
-                <p>
-                    <more>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                        has
-                        been the industry's standard dummy text ever since the 1500s, when an unknown printer
-                        took a
-                        galley of type and scrambled it to make a type specimen book.
-                    </more>
-                </p>
-            </div>
-            <div class="col-lg-3">
-                <p>
-                    <sm>2013</sm>
-                </p>
-            </div>
-
+            &lt;!&ndash;/.row &ndash;&gt;
+            <br>
         </div>
-        &lt;!&ndash;/.row &ndash;&gt;
-        <br>
-    </div>
-    &lt;!&ndash;/.container &ndash;&gt;->>
+        &lt;!&ndash;/.container &ndash;&gt;->>
 
 
-    <section id="work" name="work"></section>
-    <!--Modal skill form -->
+        <section id="work" name="work"></section>
+        <!--Modal skill form -->
     <modal title="Add a skill experience" visible="showModalsk">
         <form role="form" name="skull" ng-controller="HomeCtrl" ng-submit="addSkill(skull)">
             <div class="form-group">
@@ -417,6 +419,11 @@
                 <label for="skill_image">Skill Image</label>
                 <input type="text" ng-model="skill_image" class="form-control" id="skill_image"
                        placeholder="url for skill images"/>
+            </div>
+            <div class="form-group">
+                <label for="skill_tag">Skill Tag</label>
+                <input type="text" ng-model="skill_tag" class="form-control" id="skill_tag"
+                       placeholder="Tag for skill "/>
             </div>
             <button type="submit" class="btn btn-default">Submit</button>
         </form>
@@ -440,12 +447,13 @@
                         class="glyphicon glyphicon-minus-sign"></span></button>
             </div>
 
-            <div  class="col-xs-12 col-md-6">
-                <p><img class="img-responsive" ng-if='!isAuthenticated'  max-width="200px" max-height="200px" min-width="200px" min-height="200px" src="{{ skill.skill_image }}" alt="">
+            <div class="col-xs-12 col-sm-8 col-md-6">
+                <p><img class="img-responsive" ng-if='!isAuthenticated' width="200px" height="200px"
+                        src="{{ skill.skill_image }}" alt="">
                 </p>
 
                 <p><img class="img-responsive" ng-if='isAuthenticated' editable-url="skill.skill_image"
-                        src="{{ skill.skill_image }}" alt="" max-width="200px" max-height="200px" min-width="200px" min-height="200px"  onaftersave="updateAny()"></p>
+                        src="{{ skill.skill_image }}" alt="" width="200px" height="200px" onaftersave="updateAny()"></p>
 
                 <p ng-if='!isAuthenticated'>{{ skill.skill_title}}</p>
 
@@ -454,11 +462,11 @@
 
                 <p>
                     <more ng-if='!isAuthenticated'>{{ skill.skill_level }}<br/>
-                        <sm><i class="icon-tag"></i> system</sm>
+                        <sm><i class="icon-tag"></i>{{ skill.skill_tag }}</sm>
                     </more>
                     <more ng-if='isAuthenticated' editable-text=" skill.skill_level" onaftersave="updateAny()">
                         {{ skill.skill_level }}<br/>
-                        <sm><i class="icon-tag"></i> system</sm>
+                        <sm><i class="icon-tag"></i> {{ skill.skill_tag }}</sm>
                     </more>
                 </p>
             </div>
