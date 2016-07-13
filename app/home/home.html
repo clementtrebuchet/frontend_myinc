@@ -17,8 +17,7 @@
             <div class="row centered">
                 <div class="col-lg-12">
                     <h1>Trébuchet. Clément</h1>
-
-                    <h3>Linux Engineer / Software Developer | <a href="mailto:clement.trebuchet@gmail.com">clement.trebuchet@gmail.com</a>
+                    <h3>Dev Ops Engineer | <a href="mailto:clement.trebuchet@gmail.com">clement.trebuchet@gmail.com</a>
                     </h3>
                 </div>
                 <!--/.col-lg-12 -->
@@ -309,9 +308,9 @@
                         </div>
                         <div class="col-lg-3">
                             <p>
-                                <sm ng-if='!isAuthenticated'>{{ work.start | date:"MM/yyyy" }}
-                                    <ng-if ng-if="work.actual === false || work.actual === 'false'">- {{ work.end
-                                        |date:"MM/yyyy" }}
+                                <sm ng-if='!isAuthenticated'>
+                                    <ng-if ng-if="work.actual === false || work.actual === 'false'">{{ work.start |
+                                        date:"MM/yyyy" }}- {{ work.end|date:"MM/yyyy" }}
                                     </ng-if>
                                 </sm>
                                 <sm ng-if="isAuthenticated" editable-bsdate="work.start"
@@ -331,7 +330,7 @@
                                 <sm ng-if='!isAuthenticated' ng-hide="work.actual === false || work.actual === 'false'"
                                     class="alert alert-success">
                                     <input type="radio" checked="{{ work.actual }}" disabled/>
-                                    This is my actual work from:{{ work.start | date:"MM/yyyy" }}
+                                    Actual since : {{ work.start | date:"MM/yyyy" }}
                                 </sm>
                                 <sm ng-if='isAuthenticated' name="act" editable-radiolist="work.actual"
                                     class="alert alert-success" e-ng-options="s.value as s.text for s in statuses"

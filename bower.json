@@ -7,18 +7,19 @@
   "private": true,
   "dependencies": {
     "angular": "~1.5.7",
-    "angular-route": "~1.4.8",
-    "angular-loader": "~1.4.8",
-    "angular-mocks": "~1.4.8",
-    "html5-boilerplate": "~5.2.0",
-    "bootstrap": "~3.3.6",
-    "angular-resource": "~1.4.2",
-    "angular-gettext": "~2.3.4"
+    "angular-route": "latest",
+    "angular-loader": "latest",
+    "angular-mocks": "latest",
+    "html5-boilerplate": "latest",
+    "bootstrap": "latest",
+    "angular-resource": "latest",
+    "angular-gettext": "latest",
+    "sweetalert": "latest"
   },
   "resolutions": {
-    "angular": "~1.x"
+    "angular": "~1.5.7"
   },
   "devDependencies": {
-    "angular-translate": "~2.11.0"
+    "angular-translate": "latest"
   }
 }

@@ -39,7 +39,7 @@ A basic HTML5 Boilerplate site initially looks something like this:
 ├── index.html
 ├── humans.txt
 ├── robots.txt
-├── cross_domain.xml
+├── crossdomain.xml
 ├── favicon.ico
 ├── tile-wide.png
 └── tile.png
@@ -112,10 +112,10 @@ technology powering it.
 
 Edit this file to include any pages you need hidden from search engines.
 
-### cross_domain.xml
+### crossdomain.xml
 
 A template for working with cross-domain requests. [About
-cross_domain.xml](misc.md#crossdomainxml).
+crossdomain.xml](misc.md#crossdomainxml).
 
 ### Icons
 

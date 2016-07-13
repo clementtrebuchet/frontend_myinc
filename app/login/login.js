@@ -91,9 +91,15 @@ app.controller('UserCtrl', ['$rootScope', '$scope', '$http', '$window', '$locati
                 $rootScope.isAuthenticated = false;
 
                 // Handle login errors here
-                $scope.show();
-                $scope.error = 'Error: Invalid user or password';
+                swal({
+                    title: "Not gain access ;)",
+                    text: "You're probably not part of staff",
+                    imageUrl: "https://curriculum.trebuchetclement.fr/img/peace014.gif"
+                });
             });
+    };
+    $scope.no_pass = function () {
+        swal('Oh no too bad ....');
     };
 
     $scope.logout = function () {
