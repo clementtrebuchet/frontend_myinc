@@ -160,7 +160,10 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
             delete mData.$update_success;
             delete mData.success_modal;
         };
-
+        $scope.tobedone = function () {
+            
+            swal('Sorry', 'This is under redaction and will be available soon !!')
+        };
         var edu = {
             "cursus_date_end": new Date(),
             "cursus_title": "",

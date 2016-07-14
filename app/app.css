@@ -1,5 +1,11 @@
 /* app css stylesheet */
 
+.logocv {
+    float: right;
+    max-width: 100px;
+
+
+}
 .menu {
     list-style: none;
     border-bottom: 0.1em solid black;

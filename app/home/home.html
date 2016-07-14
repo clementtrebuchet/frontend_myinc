@@ -46,7 +46,12 @@
                 <div class="col-lg-2">
                     <a href="https://curriculum.trebuchetclement.fr/img/CV_trebuchet_clement.pdf" target="_blank"><i
                             class="icon-file"></i>
-                        DOWNLOAD PDF (French) </a>
+                        French resume </a>
+                </div>
+                 <div class="col-lg-2">
+                    <a ng-click="tobedone()" target="_blank"><i
+                            class="icon-file"></i>
+                        English resume </a>
                 </div>
 
             </div>
@@ -167,7 +172,7 @@
                                        editable-url="education.cursus_location.school_link" onaftersave="updateAny()">{{
                                         education.cursus_location.school_link
                                         }}</a>
-                                    <a ng-if='!isAuthenticated' href="{{ education.cursus_location.school_link }}">{{
+                                    <a ng-if='!isAuthenticated' target="_blank" href="{{ education.cursus_location.school_link }}">{{
                                         education.cursus_location.school_link }}</a>
                                     <br/>
                                     <i ng-if="isAuthenticated" editable-bsdate="education.cursus_date_start"
@@ -446,13 +451,13 @@
                         class="glyphicon glyphicon-minus-sign"></span></button>
             </div>
 
-            <div class="col-xs-12 col-sm-8 col-md-6">
+            <div class="col-xs-14 col-sm-6 col-md-6">
                 <p><img class="img-responsive" ng-if='!isAuthenticated' width="200px" height="200px"
                         src="{{ skill.skill_image }}" alt="">
                 </p>
 
                 <p><img class="img-responsive" ng-if='isAuthenticated' editable-url="skill.skill_image"
-                        src="{{ skill.skill_image }}" alt="" width="200px" height="200px" onaftersave="updateAny()"></p>
+                        src="{{ skill.skill_image }}" alt="" width="100px" height="100px" onaftersave="updateAny()"></p>
 
                 <p ng-if='!isAuthenticated'>{{ skill.skill_title}}</p>
 
