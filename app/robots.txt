@@ -1,0 +1,4 @@
+User-Agent: *
+Disallow:
+
+Sitemap: https://curriculum.trebuchetclement.fr/sitemap.xml

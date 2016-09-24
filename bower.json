@@ -14,7 +14,8 @@
     "bootstrap": "latest",
     "angular-resource": "latest",
     "angular-gettext": "latest",
-    "sweetalert": "latest"
+    "sweetalert": "latest",
+    "angular-seo": "latest"
   },
   "resolutions": {
     "angular": "~1.5.7"

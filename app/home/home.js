@@ -23,7 +23,7 @@ app.factory('Peoples', ['Restangular', function (Restangular) {
 
 app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$timeout', '$filter',
     function ($scope, Peoples, $window, Restangular, $timeout, $filter) {
-
+        $scope.update_success = false;
         //check for cred
         if (!$window.sessionStorage.access_token) {
 
@@ -33,30 +33,47 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
         }
         //refresh
         var refresh = function () {
-            Peoples.getList().then(function (peoples) {
-                var userWithId = _.find(peoples, function (people) {
-                    return people.lastname === 'Trébuchet';
+            try {
+                Peoples.getList().then(function (peoples) {
+                    try {
+                        var userWithId = _.find(peoples, function (people) {
+                            return people.lastname === 'Trébuchet';
+                        });
+                        $scope.users = userWithId;
+                        //sort works array by date -1
+                        var originalWorksArray = $scope.users.works;
+                        var sortedWorksArray = originalWorksArray.sort(sortWorksArray);
+                        var originalEductionArray = $scope.users.education;
+                        var sortedEducationArray = originalEductionArray.sort(sortEducationArray);
+                        $scope.users.$resolved = true;
+                        $scope.success_modal = false;
+                         $scope.update_success = false;
+                        //console.log($scope.users.skills);
+
+
+                    } catch (e) {
+                        console.log(e);
+                    }
+
                 });
-                $scope.users = userWithId;
-                //sort works array by date -1
-                var originalWorksArray = $scope.users.works;
-                var sortedWorksArray = originalWorksArray.sort(sortWorksArray);
-                var originalEductionArray = $scope.users.education;
-                var sortedEducationArray = originalEductionArray.sort(sortEducationArray);
-                $scope.users.$resolved = true;
-                $scope.update_success = false;
-                $scope.success_modal = false;
-            });
+            } catch (e) {
+                console.log(e)
+            }
+
 
         };
         // init scope
-        $scope.users = {};
+
         $scope.showModal = false;
         $scope.showModale = false;
         $scope.success_modal = false;
         $scope.showModalsk = false;
         $scope.form = {};
-        $scope.users = refresh();
+        refresh();
+        $timeout(function () {
+            $scope.htmlReady();
+        }, 2000);
+
 
         $scope.toggleModal = function () {
             $scope.showModal = !$scope.showModal;
@@ -64,7 +81,7 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
         $scope.toggleModale = function () {
             $scope.showModale = !$scope.showModale;
         };
-        $scope.toggleModalsk = function(){
+        $scope.toggleModalsk = function () {
             $scope.showModalsk = !$scope.showModalsk;
         };
 
@@ -130,7 +147,7 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
         };
 
         $scope.addSkill = function (myForm) {
-          if (typeof($scope.users.skills) === "undefined") {
+            if (typeof($scope.users.skills) === "undefined") {
                 $scope.users.skills = [];
             }
             var mySkill = myForm;
@@ -161,7 +178,7 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
             delete mData.success_modal;
         };
         $scope.tobedone = function () {
-            
+
             swal('Sorry', 'This is under redaction and will be available soon !!')
         };
         var edu = {
@@ -222,7 +239,7 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
 
         };
 
-        $scope.removeSkill = function(title) {
+        $scope.removeSkill = function (title) {
             var newScopeSkill = remove_embedded_skill($scope.users.skills, title);
             delete $scope.users.skills;
             $scope.users.skills = newScopeSkill;
@@ -241,9 +258,9 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
                 return obj.cursus_date_start != cursus_date_start && obj.cursus_date_end != cursus_date_end;
             });
         };
-        var remove_embedded_skill = function(embeddedSkillArray, title){
-            return embeddedSkillArray.filter(function(obj){
-                return obj.title !=  title;
+        var remove_embedded_skill = function (embeddedSkillArray, title) {
+            return embeddedSkillArray.filter(function (obj) {
+                return obj.title != title;
             });
         };
 
@@ -266,6 +283,7 @@ app.controller('HomeCtrl', ['$scope', 'Peoples', '$window', 'Restangular', '$tim
             }
 
         };
+
 
     }]);
 //modal directive
@@ -317,13 +335,13 @@ function sortWorksArray(a, b) {
     var dateB = new Date(b.start).getTime();
     return dateA > dateB ? -1 : 1;
 
-};
+}
 function sortEducationArray(a, b) {
     var dateA = new Date(a.cursus_date_start).getTime();
     var dateB = new Date(b.cursus_date_start).getTime();
     return dateA > dateB ? -1 : 1;
 
-};
+}
 
 
 

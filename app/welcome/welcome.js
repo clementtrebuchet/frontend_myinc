@@ -10,7 +10,7 @@ angular.module('myApp.welcome', ['ngRoute', 'ngSanitize', 'angular-carousel-3d']
         });
     }])
 
-    .controller('WelcomeCtrl', ['$scope', function ($scope) {
+    .controller('WelcomeCtrl', ['$scope', '$timeout', function ($scope, $timeout) {
 
         var vm = this;
 
@@ -47,6 +47,11 @@ angular.module('myApp.welcome', ['ngRoute', 'ngSanitize', 'angular-carousel-3d']
             controls: true,
             clicking: true
         };
+
+
+        $timeout(function () {
+            $scope.htmlReady();
+        }, 2000)
 
 
     }]);

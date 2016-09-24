@@ -47,12 +47,14 @@ h6 {
     padding-top: 10%;
     padding-bottom: 10%;
     max-height: 450px;
+    color: #f0f0f0;
 }
 
 .intro-message > h1 {
     margin: 0;
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
     font-size: 5em;
+     color: #f0f0f0;
 }
 
 .intro-divider {
@@ -63,6 +65,7 @@ h6 {
 
 .intro-message > h3 {
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+     color: #f0f0f0;
 }
 
 @media(max-width:767px) {
@@ -120,7 +123,6 @@ h6 {
 .banner {
     padding: 100px 0;
     color: #f8f8f8;
-    background: url(../img/banner-bg.jpg) no-repeat center center;
     background-size: cover;
 }
 
@@ -129,7 +131,9 @@ h6 {
     text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
     font-size: 3em;
 }
-
+.shad {
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+}
 .banner ul {
     margin-bottom: 0;
 }

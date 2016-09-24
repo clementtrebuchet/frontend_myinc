@@ -23,7 +23,7 @@ myApp.config(function ($routeProvider, authProvider, $httpProvider,
             requiresLogin: true
         });
 
-    $locationProvider.hashPrefix('!');
+    $locationProvider.html5Mode(false).hashPrefix('!');
 
     authProvider.init({
         domain: 'contoso.auth0.com',

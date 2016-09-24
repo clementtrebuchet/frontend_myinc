@@ -17,7 +17,8 @@ var app = angular.module('myApp', [
     'myApp.home',
     'myApp.admin',
     'myApp.login',
-    'myApp.version'
+    'myApp.version',
+    'seo'
 
 
 ]);
@@ -117,10 +118,6 @@ app.factory('authInterceptor', function ($rootScope, $q, $window) {
         }
     };
 });
-app.controller('AppCtrl', ['$scope', '$window', '$location', function ($scope, $window, $location) {
-
-}]);
-
 function _redirectIfNotAuthenticated($rootScope, $window, $location) {
     if (!$window.sessionStorage.access_token) {
         $rootScope.isAuthenticated = false;
@@ -132,38 +129,46 @@ function _redirectIfNotAuthenticated($rootScope, $window, $location) {
     }
 }
 
-app.config(function ($routeProvider, $httpProvider, RestangularProvider) {
+app.config(function ($routeProvider, $httpProvider, RestangularProvider, $locationProvider) {
 
+
+    $locationProvider.hashPrefix('!');
     RestangularProvider.setBaseUrl('https://curriculum.trebuchetclement.fr:5055/');
     RestangularProvider.setRestangularFields({
         id: "_id",
-        etag: '_etag',
+        etag: '_etag'
     });
-    RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
-          var extractedData;
-          // .. to look for getList operations
-          if (operation === "getList") {
+
+    RestangularProvider.addResponseInterceptor(function (data, operation, what, url, response, deferred, $timeout) {
+
+        if (response.statusCode == 200 || response.statusCode == 201 || response.statusCode == 404) {
+            console.log(response);
+
+        }
+        var extractedData;
+        // .. to look for getList operations
+        if (operation === "getList") {
             // .. and handle the data and meta data
             extractedData = data._items;
             extractedData._links = data._links;
             extractedData._meta = data._meta;
-          } else {
+        } else {
             extractedData = data._items;
-          }
-          return extractedData;
-        });
+        }
+        return extractedData;
+    });
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
     $httpProvider.interceptors.push('authInterceptor');
 
     $routeProvider.when('/home', {
         templateUrl: 'home/home.html'
-        
+
     });
 
     $routeProvider.when('/login', {
         templateUrl: 'login/login.html'
-        
+
     });
 
     $routeProvider.when('/admin', {
@@ -173,66 +178,11 @@ app.config(function ($routeProvider, $httpProvider, RestangularProvider) {
         }
     });
 
-    $routeProvider.when('/', {
+    $routeProvider.when('/welcome', {
         templateUrl: 'welcome/welcome.html',
-        
+
     });
 
+    $routeProvider.otherwise('/home');
 
 });
-/*app.config(['$stateProvider', '$urlRouterProvider', '$authProvider', '$httpProvider', function ($stateProvider, $urlRouterProvider, $authProvider, $httpProvider) {
-
- $stateProvider
- .state('home', {
- url: '/home',
- templateUrl: 'home/home.html',
- resolve: {
- redirectIfNotAuthenticated: _redirectIfNotAuthenticated
- },
- controller: 'HomeCtrl as HomeCtrl'
- })
- .state('login', {
- url: '/login',
- templateUrl: 'login/login.html',
- resolve: {
- skipIfAuthenticated: _skipIfAuthenticated
- },
- controller: 'LoginCtrl as LoginCtrl'
- })
- .state('welcome', {
- url: '/',
- templateUrl: 'index.html',
- controller: 'AppCtrl as AppCtrl'
- });
-
-
- function _skipIfAuthenticated($windows, $state, $scope) {
-
- if ($window.sessionStorage.access_token) {
-
- $scope.isAuthenticated = true;
- }
- else {
- $scope.isAuthenticated = false;
-
- }
-
- }
-
- function _redirectIfNotAuthenticated($q, $state, $auth) {
- var defer = $q.defer();
- if ($auth.authenticate()) {
- defer.resolve();
- /!* (3) *!/
- } else {
- $timeout(function () {
- $state.go('login')
- ;
- /!* (4) *!/
- });
- defer.reject();
- }
- return defer.promise;
- }
- }]);
- */

@@ -8,17 +8,31 @@
 <!--[if gt IE 8]><!-->
 <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
 <head>
+    <link rel="alternate" hreflang="en" href="https://curriculum.trebuchetclement.fr/"/>
+    <base href="/">
+    <meta name="fragment" content="!"/>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Clément Trébuchet - Freelancer</title>
-    <meta name="description" content="">
+    <title>Trebuchet Clement Freelancer - DevOps, Python, Java</title>
+    <meta name="Content-Type" content="UTF-8">
+    <meta name="Title"
+          content="Clément Trébuchet - Freelancer">
+    <meta name="Description"
+          content="I'm a freelancer, my area of ​​expertise covers two aspects : Process automation and infrastructure.Development application software , web and software package">
+    <meta name="Revisit-After" content="1 day">
+    <meta name="Robots" content="follow">
+    <meta name="Rating" content="general">
+    <meta name="Distribution" content="global">
+    <meta name="Category" content="engineering">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="img/icons/ic.ico"/>
     <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
     <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/main.css">
     <link rel="stylesheet" href="bower_components/angular-carousel-3d/dist/carousel-3d.css">
     <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css">
-
+    <link rel="stylesheet" href="static/bootstrap.css">
+    <link rel="stylesheet" href="static/landing-page.css">
 
     <link rel="stylesheet" href="static/main.css">
     <link rel="stylesheet" href="static/font-awesome.min.css">
@@ -26,20 +40,18 @@
 
     <link rel="stylesheet" href="app.css">
     <link href='static/fontgoogle.css' rel='stylesheet' type='text/css'>
-    <script src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
-    <script type="text/javascript" src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
     <link href="bower_components/angular-xeditable/dist/css/xeditable.css" rel="stylesheet">
 
 
 </head>
-<body ng-app="myApp" ng-controller="UserCtrl">
+<body ng-app="myApp" ng-controller="UserCtrl" ng-cloak>
 <div id="section-topbar">
     <div id="topbar-inner">
         <div class="container">
             <div class="row">
                 <div class="dropdown">
                     <ul id="nav" class="nav">
-                        <li class="menu-item"><a class="smoothScroll" ng-click="go('/')" title="Home"><i
+                        <li class="menu-item"><a class="smoothScroll" ng-click="go('/welcome')" title="Home"><i
                                 class="icon-home"></i></a></li>
                         <!-- <li class="menu-item"><a class="smoothScroll" href="#resume" title="Resume"><i
                                  class="icon-file"></i></a></li>
@@ -71,7 +83,7 @@
 <!--/ #section-topbar -->
 
 
-<div ng-view>
+<div ng-view ng-cloak>
 
 </div>
 
@@ -104,10 +116,11 @@
                 </p>
                 <p>
                     <t>Legal Informations</t>
+                    GEEK CONSULTING
                     <br/>
                     <a target="_blank"
-                       href="https://www.infogreffe.fr/societes/entreprise-societe/509767349-trebuchet-clement-damien-francis-50976734900020.html?typeProduitOnglet=EXTRAIT&afficherretour=false">SIRET
-                        : 509 767 349 00020</a>
+                       href="https://www.infogreffe.fr/societes/entreprise-societe/821442092-geek-consulting-310216B027830000.html">SIRET
+                        : 821 442 092 00010</a>
                     <br/>
                 </p>
             </div>
@@ -116,7 +129,8 @@
                 <h5>SOCIAL LINKS</h5>
 
                 <p>
-                    <a target="_blank" href="https://www.linkedin.com/in/clement-trebuchet-74975085"><i class="icon-linkedin"></i></a>
+                    <a target="_blank" href="https://www.linkedin.com/in/clement-trebuchet-74975085"><i
+                            class="icon-linkedin"> linkedin</i></a>
 
                 </p>
             </div>
@@ -136,31 +150,33 @@
 <!-- In production use:
 <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
 -->
-<script src="bower_components/jquery/dist/jquery.min.js"></script>
-<script src="bower_components/angular/angular.js"></script>
-<script src="bower_components/angular-carousel-3d/dist/carousel-3d.js"></script>
-<script src="bower_components/angular-swipe/dist/angular-swipe.js"></script>
-<script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<script src="bower_components/angular-route/angular-route.js"></script>
-<script src="bower_components/angular-resource/angular-resource.js"></script>
-<script src="bower_components/restangular/src/restangular.js"></script>
-<script src="bower_components/lodash/lodash.js"></script>
-<script src="bower_components/angular-cookies/angular-cookies.js"></script>
-<script src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
-<script src="bower_components/angular-gettext/dist/angular-gettext.min.js"></script>
-<script src="app.js"></script>
-<script src="login/login.js"></script>
-<script src="admin/admin.js"></script>
-<script src="home/home.js"></script>
-<script src="welcome/welcome.js"></script>
-<script src="components/version/version.js"></script>
-<script src="components/version/version-directive.js"></script>
-<script src="components/version/interpolate-filter.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
-<script src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
-<script src="bower_components/angular-animate/angular-animate.min.js"></script>
-<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-
-
+<script type="text/javascript" src="bower_components/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="bower_components/angular/angular.js"></script>
+<script type="text/javascript" src="bower_components/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
+<script type="text/javascript" src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript" src="bower_components/angular-carousel-3d/dist/carousel-3d.js"></script>
+<script type="text/javascript" src="bower_components/angular-swipe/dist/angular-swipe.js"></script>
+<script type="text/javascript" src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="bower_components/angular-route/angular-route.js"></script>
+<script type="text/javascript" src="bower_components/angular-resource/angular-resource.js"></script>
+<script type="text/javascript" src="bower_components/restangular/src/restangular.js"></script>
+<script type="text/javascript" src="bower_components/lodash/lodash.js"></script>
+<script type="text/javascript" src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script type="text/javascript" src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
+<script type="text/javascript" src="bower_components/angular-gettext/dist/angular-gettext.min.js"></script>
+<script type="text/javascript" src="app.js"></script>
+<script type="text/javascript" src="login/login.js"></script>
+<script type="text/javascript" src="admin/admin.js"></script>
+<script type="text/javascript" src="home/home.js"></script>
+<script type="text/javascript" src="welcome/welcome.js"></script>
+<script type="text/javascript" src="components/version/version.js"></script>
+<script type="text/javascript" src="components/version/version-directive.js"></script>
+<script type="text/javascript" src="components/version/interpolate-filter.js"></script>
+<script type="text/javascript"
+        src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
+<script type="text/javascript" src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
+<script type="text/javascript" src="bower_components/angular-animate/angular-animate.min.js"></script>
+<script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script type="text/javascript" src="bower_components/angular-seo/angular-seo.js"></script>
 </body>
 </html>

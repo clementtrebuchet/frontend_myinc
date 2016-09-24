@@ -11,7 +11,7 @@
  controller: 'LoginCtrl'
  });
  }]);*/
-var app = angular.module('myApp.login', ['ngRoute', 'ngResource']);
+var app = angular.module('myApp.login', ['ngRoute', 'ngResource',]);
 
 app.config(['$routeProvider', '$resourceProvider', '$httpProvider', function ($routeProvider, $resourceProvider, $httpProvider) {
     // Don't strip trailing slashes from calculated URLs
@@ -51,10 +51,12 @@ app.controller('UserCtrl', ['$rootScope', '$scope', '$http', '$window', '$locati
     if (!$window.sessionStorage.access_token) {
         $scope.isAuthenticated = false;
         $rootScope.isAuthenticated = false;
+
     }
     else {
         $scope.isAuthenticated = true;
         $rootScope.isAuthenticated = true;
+
     }
     $scope.go = function (target) {
         $location.path(target);
