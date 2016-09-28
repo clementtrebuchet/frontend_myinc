@@ -2,6 +2,8 @@
 
 // Declare app level module which depends on views, and components
 var app = angular.module('myApp', [
+    'ngMaterial',
+    'md.data.table',
     'angular-carousel-3d',
     'gettext',
     'ngCookies',
@@ -17,6 +19,7 @@ var app = angular.module('myApp', [
     'myApp.home',
     'myApp.admin',
     'myApp.login',
+    'myApp.onions',
     'myApp.version',
     'seo'
 
@@ -145,17 +148,23 @@ app.config(function ($routeProvider, $httpProvider, RestangularProvider, $locati
             console.log(response);
 
         }
-        var extractedData;
-        // .. to look for getList operations
-        if (operation === "getList") {
-            // .. and handle the data and meta data
-            extractedData = data._items;
-            extractedData._links = data._links;
-            extractedData._meta = data._meta;
-        } else {
-            extractedData = data._items;
+        try {
+            var extractedData;
+            // .. to look for getList operations
+            if (operation === "getList") {
+                // .. and handle the data and meta data
+                extractedData = data._items;
+                extractedData._links = data._links;
+                extractedData._meta = data._meta;
+            } else {
+                extractedData = data._items;
+            }
+            return extractedData;
+        } catch (e) {
+            console.log(e);
+            return data;
         }
-        return extractedData;
+
     });
     $httpProvider.defaults.useXDomain = true;
     delete $httpProvider.defaults.headers.common['X-Requested-With'];
@@ -179,7 +188,15 @@ app.config(function ($routeProvider, $httpProvider, RestangularProvider, $locati
     });
 
     $routeProvider.when('/welcome', {
-        templateUrl: 'welcome/welcome.html',
+        templateUrl: 'welcome/welcome.html'
+
+    });
+
+    $routeProvider.when('/onions', {
+        templateUrl: 'onions/onions.html',
+         resolve: {
+            redirectIfNotAuthenticated: _redirectIfNotAuthenticated
+        }
 
     });
 

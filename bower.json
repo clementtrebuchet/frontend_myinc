@@ -15,7 +15,8 @@
     "angular-resource": "latest",
     "angular-gettext": "latest",
     "sweetalert": "latest",
-    "angular-seo": "latest"
+    "angular-seo": "latest",
+    "angular-material-data-table": "~0.10.9"
   },
   "resolutions": {
     "angular": "~1.5.7"
