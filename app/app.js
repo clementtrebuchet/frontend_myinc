@@ -132,8 +132,12 @@ function _redirectIfNotAuthenticated($rootScope, $window, $location) {
     }
 }
 
-app.config(function ($routeProvider, $httpProvider, RestangularProvider, $locationProvider) {
+app.config(function ($routeProvider, $httpProvider, RestangularProvider, $locationProvider, $mdThemingProvider) {
 
+    $mdThemingProvider.theme('brown')
+        .primaryPalette('purple')
+        .accentPalette('pink')
+        .warnPalette('red');
 
     $locationProvider.hashPrefix('!');
     RestangularProvider.setBaseUrl('https://curriculum.trebuchetclement.fr:5055/');
@@ -194,9 +198,7 @@ app.config(function ($routeProvider, $httpProvider, RestangularProvider, $locati
 
     $routeProvider.when('/onions', {
         templateUrl: 'onions/onions.html',
-         resolve: {
-            redirectIfNotAuthenticated: _redirectIfNotAuthenticated
-        }
+
 
     });
 

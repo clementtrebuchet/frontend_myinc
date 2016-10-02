@@ -1,44 +1,96 @@
 <div ng-controller="OnionsCtrl" ng-cloak>
-    <div id="headerwrap">
+    <div id="torwrap">
         <div class="container">
             <div class="row centered">
                 <div class="col-lg-12">
-                    <h1>Deep web scan</h1>
-                    <h3>Scrapping dark net websites</a>
+                    <h1>Deep Directory</h1>
+                    <h3>TOR Onions Links Services
                     </h3>
                 </div>
                 <!--/.col-lg-12 -->
             </div>
             <!--/.row -->
+
         </div>
         <!--/.container -->
     </div>
-    <md-content md-theme="default">
-        <section>
 
-            <md-table-container>
+    <hr/>
+    <md-content md-theme="brown">
+        <h1 style=" font-size: 45px;
+         color: #fafff4;
+         text-shadow: -1px 0 #4113c6, 0 1px #4113c6, 1px 0 #4113c6, 0 -1px #4113c6;">Services</h1>
+        <md-switch md-theme="brown" ng-model="search_touched" aria-label="Search">
+            Search on Services
+        </md-switch>
+        <hr/>
+
+        <section ng-show="search_touched === true" md-theme="brown">
+            <ng-form name="searchonions">
+
+                <md-input-container class="md-icon-float md-block">
+                    <!-- Use floating label instead of placeholder -->
+                    <label for="sef">Search Field</label>
+                    <md-select id="sef" name="sef" ng-model="searchField" required>
+                        <md-option><em>None</em></md-option>
+                        <md-option ng-repeat="state in fields" ng-value="state">
+                            {{state}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <br/>
+                <md-input-container md-no-float class="md-block">
+                    <label for="exp">Search Expression</label>
+                    <input ng-model="expression" type="text" ng-disabled="searchonions.sef.$invalid" name="exp" id="exp"
+                           placeholder="search expression" required>
+                </md-input-container>
+                <md-button class="md-raised md-primary md-hue-2" ng-disabled="searchonions.exp.$invalid"
+                           ng-click="search()">Search
+                </md-button>
+
+            </ng-form>
+
+        </section>
+        <section>
+            <div style="padding:10px 10px 10px 10px;" layout="row" layout-sm="column" layout-align="space-around">
+                <md-progress-linear md-mode="query" ng-disabled="searching === false"
+                                    md-mode="indeterminate"></md-progress-linear>
+            </div>
+            <md-table-container md-theme="brown">
                 <table md-table md-progress="loader">
-                    <thead md-head md-order="query.order" md-on-reorder="getPaginateRe">
+                    <thead md-head md-order="query.order" md-on-reorder="getPaginateRe" md-theme="brown">
                     <tr md-row>
                         <!--<th md-column><span>Category</span></th> !-->
                         <th md-column>Service name</th>
                         <th md-column>Web detected</th>
-                        <th md-column md-order-by="-1">Updated</th>
+                        <th md-column md-order-by="1">Updated</th>
+                        <th md-column>Server</th>
+                        <th md-column>Title</th>
+                        <!--<th md-column>Linked services</th>-->
+                        <th md-column>IP addresses</th>
+                        <th md-column>SSH Key</th>
                     </tr>
                     </thead>
-                    <tbody md-body>
+                    <tbody md-body md-theme="brown">
                     <tr md-row md-select="item" md-select-id="hiddenService" md-auto-select
                         ng-repeat="item in onions_items | orderBy:  item._updated">
                         <!--  <td md-cell>{{ item.report_type.report_type }}</td> !-->
-                        <td style="color: black" md-cell>{{ item.hiddenService }}</td>
-                        <td style="color: black" md-cell>{{ item.webDetected | json }}</td>
-                        <td style="color: black" md-cell>{{ item._updated | date }}</td>
+                        <td class="md-body-2" md-cell><a href='http://{{ item.hiddenService }}.cab' target="_blank">{{
+                            item.hiddenService }}</a></td>
+                        <td class="md-body-2" md-cell>{{ item.webDetected | json }}</td>
+                        <td class="md-body-2" md-cell>{{ item._updated | date: 'MM/dd/yyyy HH:mm:ss': '+0200' }}</td>
+                        <td class="md-body-2" md-cell>{{ item.serverVersion }}</td>
+                        <td class="md-body-2" md-cell>{{ item.pageTitle }}</td>
+                        <!--<td class="md-body-2" style="width: 50px; overflow:hidden;" md-cell><invented ng-repeat="linkedsite in  item.linkedSites">{{ linkedsite | json }}</invented></td>-->
+                        <td class="md-body-2" md-cell>{{ item.ipAddresses |json }}</td>
+                        <td class="md-body-2" md-cell>{{ item.sshKey |json }}</td>
+
                     </tr>
                     </tbody>
                     <tfoot md-foot>
                     <tr md-row>
                         <td md-cell></td>
-                        <td md-cell><b>Total: </b>{{total}}</td>
+                        <td md-cell><b style="color: purple;">Total: </b>{{total}}</td>
                         <td md-cell colspan="6"></td>
                     </tr>
                     </tfoot>
@@ -50,24 +102,94 @@
                                      md-page-select></md-table-pagination>
             </p>
         </section>
-        <section>
-            <md-input-container class="md-icon-float md-block">
-                <!-- Use floating label instead of placeholder -->
-                <label>Search Field</label>
-                <md-select ng-model="searchField">
-                    <md-option><em>None</em></md-option>
-                    <md-option ng-repeat="state in fields" ng-value="state">
-                        {{state}}
-                    </md-option>
-                </md-select>
-            </md-input-container>
-            <br/>
-            <md-input-container md-no-float class="md-block">
-                <label>Search Expression</label>
-                <input ng-model="expression" type="text" placeholder="search expression">
-            </md-input-container>
-            <button  type="button" class="btn btn-info" ng-click="search()">Search</button>
+
+        <hr/>
+
+        <h1 style=" font-size: 45px;
+         color: #fafff4;
+         text-shadow: -1px 0 #4113c6, 0 1px #4113c6, 1px 0 #4113c6, 0 -1px #4113c6;">Exit Relay</h1>
+        <md-switch md-theme="brown" ng-model="search_touchedexit" aria-label="Search">
+            Search on Exit Relay
+        </md-switch>
+        <hr/>
+        <section ng-show="search_touchedexit === true" md-theme="brown">
+            <ng-form name="searchonionsexit">
+
+                <md-input-container class="md-icon-float md-block">
+                    <!-- Use floating label instead of placeholder -->
+                    <label for="sefexit">Search Field</label>
+                    <md-select id="sefexit" name="sefexit" ng-model="searchFieldExit" required>
+                        <md-option><em>None</em></md-option>
+                        <md-option ng-repeat="ex in fieldexit" ng-value="ex">
+                            {{ex}}
+                        </md-option>
+                    </md-select>
+                </md-input-container>
+                <br/>
+                <md-input-container md-no-float class="md-block">
+                    <label for="expexit">Search Expression</label>
+                    <input ng-model="expressionexist" type="text" ng-disabled="searchonionsexit.sefexit.$invalid"
+                           name="expexit"
+                           id="expexit" placeholder="search expression" required>
+                </md-input-container>
+                <md-button class="md-raised md-primary md-hue-2" ng-disabled="searchonionsexit.expexit.$invalid"
+                           ng-click="searchexit()">Search
+                </md-button>
+
+            </ng-form>
+
         </section>
+        <section>
+            <div style="padding:10px 10px 10px 10px;" layout="row" layout-sm="column" layout-align="space-around">
+                <md-progress-linear md-mode="query" ng-disabled="searchingexit === false"
+                                    md-mode="indeterminate"></md-progress-linear>
+            </div>
+            <md-table-container md-theme="brown">
+                <table md-table md-progress="loader">
+                    <thead md-head md-order="queryexit.order" md-on-reorder="getPaginateReexit" md-theme="brown">
+                    <tr md-row>
+                        <!--<th md-column><span>Category</span></th> !-->
+                        <th md-column>Service name</th>
+                        <th md-column>Address</th>
+                        <th md-column md-order-by="1">Updated</th>
+                        <th md-column>Fingerprint</th>
+                        <th md-column>Nickname</th>
+                        <th md-column>Country</th>
+
+                    </tr>
+                    </thead>
+                    <tbody md-body md-theme="brown">
+                    <tr md-row md-select="item" md-select-id="hiddenService" md-auto-select
+                        ng-repeat="item in onionsexit_items | orderBy:  item._updated">
+                        <!--  <td md-cell>{{ item.report_type.report_type }}</td> !-->
+                        <td class="md-body-2" md-cell><a href='http://{{ item.hiddenService }}.cab' target="_blank">{{
+                            item.hiddenService }}</a></td>
+                        <td class="md-body-2" md-cell>{{ item.address | json }}</td>
+                        <td class="md-body-2" md-cell>{{ item._updated | date: 'MM/dd/yyyy HH:mm:ss': '+0200' }}</td>
+                        <td class="md-body-2" md-cell>{{ item.fingerprint }}</td>
+                        <td class="md-body-2" md-cell>{{ item.nickname }}</td>
+                        <td class="md-body-2" md-cell>{{ item.locale |json }}</td>
+
+
+                    </tr>
+                    </tbody>
+                    <tfoot md-foot>
+                    <tr md-row>
+                        <td md-cell></td>
+                        <td md-cell><b style="color: purple;">Total: </b>{{totalexit}}</td>
+                        <td md-cell colspan="6"></td>
+                    </tr>
+                    </tfoot>
+                </table>
+            </md-table-container>
+            <p class="label">
+                <md-table-pagination md-limit="queryexit.limit" md-limit-options="[5, 15, 25]" md-page="queryexit.page"
+                                     md-total="{{ totalexit }}" md-on-paginate="getPaginateReexit"
+                                     md-page-select></md-table-pagination>
+            </p>
+        </section>
+
+
     </md-content>
 
 </div>
