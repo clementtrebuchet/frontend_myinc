@@ -21,6 +21,7 @@ var app = angular.module('myApp', [
     'myApp.login',
     'myApp.onions',
     'myApp.version',
+    'chart.js',
     'seo'
 
 
@@ -132,7 +133,9 @@ function _redirectIfNotAuthenticated($rootScope, $window, $location) {
     }
 }
 
-app.config(function ($routeProvider, $httpProvider, RestangularProvider, $locationProvider, $mdThemingProvider) {
+app.config(function ($routeProvider, $httpProvider, RestangularProvider, $locationProvider, $mdThemingProvider, ChartJsProvider) {
+
+    //ChartJsProvider.setOptions({colors: ['#803690', '#00ADF9', '#DCDCDC', '#46BFBD', '#FDB45C', '#949FB1', '#4D5360']});
 
     $mdThemingProvider.theme('brown')
         .primaryPalette('purple')

@@ -14,7 +14,6 @@
         </div>
         <!--/.container -->
     </div>
-
     <hr/>
     <md-content md-theme="brown">
         <h1 style=" font-size: 45px;
@@ -107,9 +106,9 @@
 
         <h1 style=" font-size: 45px;
          color: #fafff4;
-         text-shadow: -1px 0 #4113c6, 0 1px #4113c6, 1px 0 #4113c6, 0 -1px #4113c6;">Exit Relay</h1>
+         text-shadow: -1px 0 #4113c6, 0 1px #4113c6, 1px 0 #4113c6, 0 -1px #4113c6;">Exit Relays</h1>
         <md-switch md-theme="brown" ng-model="search_touchedexit" aria-label="Search">
-            Search on Exit Relay
+            Search on Exit Relays
         </md-switch>
         <hr/>
         <section ng-show="search_touchedexit === true" md-theme="brown">
@@ -137,6 +136,22 @@
                 </md-button>
 
             </ng-form>
+
+        </section>
+        <section>
+            <div class="row" style="margin-left: 10px;">
+                <div class="col-lg-5 col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Number Of Exit Relay accessed by Country</div>
+                        <canvas id="base" class="chart-horizontal-bar"
+                                chart-data="relay_by_locale_data" chart-labels="relay_by_locale_labels">
+                        </canvas>
+                    </div>
+                </div>
+                <md-button class="md-primary md-hue-2"
+                           ng-click="getPaginateRe(); getPaginateReexit(); relay_by_locale_chart();">Refresh Board
+                </md-button>
+            </div>
 
         </section>
         <section>
@@ -188,8 +203,6 @@
                                      md-page-select></md-table-pagination>
             </p>
         </section>
-
-
     </md-content>
 
 </div>

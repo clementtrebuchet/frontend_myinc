@@ -132,6 +132,32 @@ app.factory('Onions', ['$http', function ($http) {
         )
     };
 
+    onion_client.prototype.relay_by_locale_data = function (successCbk, errorCbk) {
+
+        var self = this;
+        $http({
+            'url': self.default_url() + 'relay_by_locale',
+            'method': 'GET',
+            'withCredentials': false
+        }).then(
+            function (response) {
+                if (response.status == '200') {
+                    try {
+
+                        //console.log(response.data);
+                        successCbk(response.data['_items']);
+                    }
+                    catch (e) {
+                        console.log(e);
+                        errorCbk(e);
+                    }
+                } else if (response.status == '401') {
+                    console.log(response);
+                    errorCbk('Authentication error ' + response);
+                }
+            }
+        )
+    };
 
     return onion_client;
 
@@ -150,6 +176,8 @@ app.controller('OnionsCtrl', ['$scope', 'Onions', '$q', '$mdToast', function ($s
     $scope.searchingexit = false;
     $scope.search_touched = false;
     $scope.search_touchedexit = false;
+    $scope.relay_by_locale_labels = [];
+    $scope.relay_by_locale_data = [];
 
     function success(onions) {
         $scope.onions_items = [];
@@ -341,9 +369,27 @@ app.controller('OnionsCtrl', ['$scope', 'Onions', '$q', '$mdToast', function ($s
         }
     };
 
+    $scope.relay_by_locale_chart = function () {
+        $scope.relay_by_locale_labels = [];
+        $scope.relay_by_locale_data = [];
+        $scope.oni.relay_by_locale_data(
+            function (array_data) {
+                array_data.forEach(function (item) {
+                    $scope.relay_by_locale_labels.push(item['_id'].toUpperCase());
+                    $scope.relay_by_locale_data.push(item['number']);
+
+                });
+
+            },
+            function (error) {
+                console.log(error);
+            }
+        )
+    };
 
     $scope.getPaginateRe();
     $scope.getPaginateReexit();
+    $scope.relay_by_locale_chart();
 }
 
 ]);
