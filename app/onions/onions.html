@@ -19,11 +19,15 @@
         <h1 style=" font-size: 45px;
          color: #fafff4;
          text-shadow: -1px 0 #4113c6, 0 1px #4113c6, 1px 0 #4113c6, 0 -1px #4113c6;">Services</h1>
-        <md-switch md-theme="brown" ng-model="search_touched" aria-label="Search">
+
+            <md-switch md-theme="brown" ng-model="search_touched" aria-label="Search">
             Search on Services
         </md-switch>
+        <md-button class="md-primary md-hue-2"
+                   ng-click="getPaginateRe(); getPaginateReexit(); relay_by_locale_chart();relay_hit_chart();">
+            Refresh Board
+        </md-button>
         <hr/>
-
         <section ng-show="search_touched === true" md-theme="brown">
             <ng-form name="searchonions">
 
@@ -139,18 +143,23 @@
 
         </section>
         <section>
-            <div class="row" style="margin-left: 10px;">
-                <div class="col-lg-5 col-sm-12">
+            <div class="row" style="text-align: center;">
+                <div class="col-lg-6 col-sm-12">
                     <div class="panel panel-default">
-                        <div class="panel-heading">Number Of Exit Relay accessed by Country</div>
+                        <div class="panel-heading"><h5 class="shad">Top Exit Accessed By Country</h5></div>
                         <canvas id="base" class="chart-horizontal-bar"
                                 chart-data="relay_by_locale_data" chart-labels="relay_by_locale_labels">
                         </canvas>
                     </div>
                 </div>
-                <md-button class="md-primary md-hue-2"
-                           ng-click="getPaginateRe(); getPaginateReexit(); relay_by_locale_chart();">Refresh Board
-                </md-button>
+                <div class="col-lg-6 col-sm-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading"><h5 class="shad">Top Hit Exit Relay</h5></div>
+                        <canvas id="chart-bar" class="chart chart-bar"
+                                chart-data="relay_hit_data" chart-labels="relay_hit_labels">
+                        </canvas>
+                    </div>
+                </div>
             </div>
 
         </section>

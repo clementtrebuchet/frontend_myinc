@@ -159,6 +159,33 @@ app.factory('Onions', ['$http', function ($http) {
         )
     };
 
+    onion_client.prototype.relay_hit_data = function (successCbk, errorCbk) {
+
+        var self = this;
+        $http({
+            'url': self.default_url() + 'relay_hit',
+            'method': 'GET',
+            'withCredentials': false
+        }).then(
+            function (response) {
+                if (response.status == '200') {
+                    try {
+
+                        //console.log(response.data);
+                        successCbk(response.data['_items']);
+                    }
+                    catch (e) {
+                        console.log(e);
+                        errorCbk(e);
+                    }
+                } else if (response.status == '401') {
+                    console.log(response);
+                    errorCbk('Authentication error ' + response);
+                }
+            }
+        )
+    };
+
     return onion_client;
 
 }]);
@@ -387,9 +414,29 @@ app.controller('OnionsCtrl', ['$scope', 'Onions', '$q', '$mdToast', function ($s
         )
     };
 
+
+    $scope.relay_hit_chart = function () {
+        $scope.relay_hit_labels = [];
+        $scope.relay_hit_data = [];
+        $scope.oni.relay_hit_data(
+            function (array_data) {
+                array_data.forEach(function (item) {
+                    $scope.relay_hit_labels.push(item['_id'].toUpperCase()+ ' ' + item['locale'][0].toUpperCase());
+                    $scope.relay_hit_data.push(item['number']);
+
+                });
+
+            },
+            function (error) {
+                console.log(error);
+            }
+        )
+    };
+
     $scope.getPaginateRe();
     $scope.getPaginateReexit();
     $scope.relay_by_locale_chart();
+    $scope.relay_hit_chart();
 }
 
 ]);
