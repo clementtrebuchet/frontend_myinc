@@ -22,7 +22,8 @@ var app = angular.module('myApp', [
     'myApp.onions',
     'myApp.version',
     'chart.js',
-    'seo'
+    'seo',
+    'ngclipboard'
 
 
 ]);

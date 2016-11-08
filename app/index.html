@@ -131,16 +131,80 @@
                     <br/>
                 </p>
             </div>
-            <div class="col-lg-3">
+            <div class="col-lg-5">
 
                 <h5>SOCIAL LINKS</h5>
 
                 <p>
                     <a target="_blank" href="https://www.linkedin.com/in/clement-trebuchet-74975085"><i
                             class="icon-linkedin"> linkedin</i></a>
-
                 </p>
+                <md-card>
+                    <md-card-header>
+                        <md-card-avatar>
+                            <img class="md-user-avatar" src="img/pgp.png"/>
+                        </md-card-avatar>
+                        <md-card-header-text>
+                            <span class="md-title">PGP</span>
+                            <span class="md-subhead">Public Key</span>
+                        </md-card-header-text>
+                    </md-card-header>
+                    <img ng-src="{{imagePath}}" style="max-height: 100px" class="md-card-image" alt="PGP">
+                    <md-card-title>
+                        <md-card-title-text>
+                            Get my PGP public key below.
+                        </md-card-title-text>
+                    </md-card-title>
+                    <md-card-actions layout="row" layout-align="start center">
+                        <md-button ngclipboard data-clipboard-target="#clementpgp">Copy to clipboard</md-button>
+                    </md-card-actions>
+                    <md-card-content>
+                        <pre id="clementpgp" style="white-space: pre-line;font-size: 8px">
+                            -----BEGIN PGP PUBLIC KEY BLOCK-----
+                            Version: GnuPG v1
+
+                            mQMuBFgfM08RCADPPV7DhI0Njc079tVGhn3NJpeZC2qOC3k0tGfHJ106sWcBoBvW
+                            xa4nizoPPLviyI/02Hr8Jrc6OqjNW5OSucK2cuaI9o0FSM7Whhncig40rDz6H+gr
+                            LhSDMumpkJN1UtgPy0c0eebBXudtslEv3yCxRD3DsOHX7sSocc0XV2BsKgki6ALk
+                            bZTxmBy0maKt5DN4+XK4ffYD7+ABsZJ2wNk4aTgbvLPWK6jjVtbkN8tKvtZ6rxNL
+                            LhjlcIe/GwI3VhyFlBQ499kuDadtneUtHH8XGwsgVQ5EYckNsmwkasKje5EgB20d
+                            hOAeLxpkGiRoTSA7lOK4IFw02WAzqc1EFoLzAQCs7ISiUfqVSJhgOq357a1nbSbH
+                            sU1oIKXjHciuGQLGkQf+OeuCCOaT9K9JGSxOEN6cHWSSWzciWHGt+qe/3dFF+7V1
+                            bqZP1XY+zIJHQJszzkSkJK6s4zjAp/1m359VoPu9KIILy36EnVvP8dtTrdH+l2Ia
+                            ZdMEfbBNf3WaCNU6o3OJjON1p7RuV/aV11TnF0VncG3tbDfvt7aCxkLhLeqbOiYp
+                            ZCUuaF6XCVTjTd9/bNzB+ysg74I8dgmUL6g7/CIUYq7HBJ32V/dpFuEugbe8ZNR0
+                            rR1722LOB+qqPGRHbKulvDQvKRLzOJO5cCt/i77C+L54Oc237A2ut3DSXWIEqR6e
+                            BJoP3TQ41s6eK9kq+PU7sQVSXoxwr7FjlUgXmIyXFwgApcrKeTIkIDjNmnamxDYM
+                            VXvjBK8vCAXsTdtMDNo3KVU+IebLSA8JM9eswmzKVH2c/HTfiVZMfxyFJCVU4RWW
+                            Z52SsV+1wbSpx1aXfjItLcE+NKPPDRzwA9k5R7WuIz3ihC+r7I8zXqZHDCUG/cTR
+                            YbnHMCXLABnD/5bHJQwkJM9XGgomqA6z+tA2sFeRo7JOpqWqx4k+lO1TiLBQTP+h
+                            U/xQBrlTbQoUWkQC+R4v/+WPhG35u+4n2YINMby6jj0ium/YfgSKVrpCsp5hQFkR
+                            CpEup+8nUDgEC2WN2GLWW9ouVk3ppav8htkKYo6fbtmsC/KtIijczcUqudqUPTPU
+                            nbQvQ2xlbWVudCBUcmVidWNoZXQgPGNsZW1lbnQudHJlYnVjaGV0QGdtYWlsLmNv
+                            bT6IegQTEQgAIgUCWB8zTwIbAwYLCQgHAwIGFQgCCQoLBBYCAwECHgECF4AACgkQ
+                            tYzENtlMCO5I/AD+NG4qnrIrLDL89G2eCpz6diiIgBLAEm1EwYyjDSvSiPUA/0kh
+                            HBrJT1NIkZIr0F9lz+2nSGQKYM38iQx+3Ag/ShoyuQINBFgfM08QCACsbL106cM6
+                            olMYDvgeWcJZ52uZTST3RrKVGiz/G0wA0e010auxIg4szgU+ZneXTgOX71TNRjrI
+                            8fvqcM+IDWsyVKX+Y+M/npzRLn4fCIH6mXW5EuT/Bw2xo90ebdQDGxL7sYqjhNgH
+                            drAjLIvurSWObYV3RYFcHGOWOYk1cyg8pmaEOUKP0pDqfNUqtRvkFVyZFAYvmoXW
+                            LzkX2tV9I2EQe5D9J2mNxdFN0Mp5V8+1bxmyxPlwETDCm0JqEaWUMbAg/IVXS9bw
+                            BpQPV5veFi6TPJ2tpk5HJJJaCn1TO8lTjQaj18TVgmUKDbhiujjt9c/e/UCRdeMk
+                            BGmVp95s8X5vAAMFB/4veJXN+Fr/Kz6zo/WUuxIxg+VeR+wfAIYOY1ENBT4O+cgI
+                            qp7RFapcBOf7IFrYjb6oMcehCSgueTWdYlko1CU6rrQFHL1zGjSy3irBs6SUaP4A
+                            c5qr6b5UATOkwX8MJRqv6t7XY6PUd6DZiVFbSM4m/qN54CN5Ti4QnR/kuXXE18yv
+                            15gTnvqWyOQTCXgSWOeMxOrmrJ50Nt5y4Ppq8ysjlRbmlrui32WwnLyoVH6HXdsc
+                            SayGPBPShIpqCfhDbn48/84zO0PF8o/eleXCBervs0cVMhgyL6ebKOqdC/A+WIfy
+                            R+0sY+ywPdrZNQ07ZKVabqB+Ads5yz/IAHWejXYDiGEEGBEIAAkFAlgfM08CGwwA
+                            CgkQtYzENtlMCO7SAQD8Cpdw3Q3Bnm1SnsZ4AyPwImVXTn21o3+yrwXuX64/JAAB
+                            AJfwEpY6wifiXg3wtOMSvwMDL/NYXr1Ck8t2c8DnvqJM
+                            =sOd7
+                            -----END PGP PUBLIC KEY BLOCK-----
+                        </pre>
+                    </md-card-content>
+
+                </md-card>
             </div>
+
         </div>
         <!--/.row -->
     </div>
@@ -182,6 +246,7 @@
 <script type="text/javascript" src="components/version/interpolate-filter.js"></script>
 <script type="text/javascript"
         src="//cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.14.3/ui-bootstrap-tpls.min.js"></script>
+<script src="https://cdn.rawgit.com/zenorocha/clipboard.js/master/dist/clipboard.min.js"></script>
 <script type="text/javascript" src="bower_components/angular-xeditable/dist/js/xeditable.js"></script>
 <script type="text/javascript" src="bower_components/angular-animate/angular-animate.min.js"></script>
 <script type="text/javascript" src="bower_components/angular-sanitize/angular-sanitize.js"></script>
@@ -192,5 +257,6 @@
 <script type="text/javascript" src="bower_components/angular-material/angular-material.js"></script>
 <script type="text/javascript" src="bower_components/angular-material-data-table/dist/md-data-table.min.js"></script>
 <script type="text/javascript" src="bower_components/angular-seo/angular-seo.js"></script>
+<script src="bower_components/ngclipboard/dist/ngclipboard.min.js"></script>
 </body>
 </html>
