@@ -70,8 +70,8 @@
                         <th md-column>Server</th>
                         <th md-column>Title</th>
                         <!--<th md-column>Linked services</th>-->
-                        <th md-column>IP addresses</th>
-                        <th md-column>SSH Key</th>
+                        <!--<th md-column>IP addresses</th>
+                        <th md-column>SSH Key</th> !-->
                     </tr>
                     </thead>
                     <tbody md-body md-theme="brown">
@@ -81,12 +81,12 @@
                         <td class="md-body-2" md-cell><a href='http://{{ item.hiddenService }}.cab' target="_blank">{{
                             item.hiddenService }}</a></td>
                         <td class="md-body-2" md-cell>{{ item.webDetected | json }}</td>
-                        <td class="md-body-2" md-cell>{{ item._updated | date: 'MM/dd/yyyy HH:mm:ss': '+0200' }}</td>
+                        <td class="md-body-2" md-cell>{{ item._updated | date: 'MM/dd/yyyy HH:mm:ss': '+0100' }}</td>
                         <td class="md-body-2" md-cell>{{ item.serverVersion }}</td>
                         <td class="md-body-2" md-cell>{{ item.pageTitle }}</td>
                         <!--<td class="md-body-2" style="width: 50px; overflow:hidden;" md-cell><invented ng-repeat="linkedsite in  item.linkedSites">{{ linkedsite | json }}</invented></td>-->
-                        <td class="md-body-2" md-cell>{{ item.ipAddresses |json }}</td>
-                        <td class="md-body-2" md-cell>{{ item.sshKey |json }}</td>
+                        <!--<td class="md-body-2" md-cell>{{ item.ipAddresses |json }}</td>
+                        <td class="md-body-2" md-cell>{{ item.sshKey |json }}</td> !-->
 
                     </tr>
                     </tbody>
@@ -189,7 +189,7 @@
                         <td class="md-body-2" md-cell><a href='http://{{ item.hiddenService }}.cab' target="_blank">{{
                             item.hiddenService }}</a></td>
                         <td class="md-body-2" md-cell>{{ item.address | json }}</td>
-                        <td class="md-body-2" md-cell>{{ item._updated | date: 'MM/dd/yyyy HH:mm:ss': '+0200' }}</td>
+                        <td class="md-body-2" md-cell>{{ item._updated | date: 'MM/dd/yyyy HH:mm:ss': '+100' }}</td>
                         <td class="md-body-2" md-cell>{{ item.fingerprint }}</td>
                         <td class="md-body-2" md-cell>{{ item.nickname }}</td>
                         <td class="md-body-2" md-cell>{{ item.locale |json }}</td>
