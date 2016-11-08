@@ -115,6 +115,7 @@ app.controller('UserCtrl', ['$rootScope', '$scope', '$http', '$window', '$locati
 
     };
 
+    $scope.imagePath = 'img/Logo-PGP.jpg';
 }]);
 
 
